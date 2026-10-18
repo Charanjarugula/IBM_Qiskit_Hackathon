@@ -63,6 +63,10 @@ def generate_report(directory):
     from simulator.reference import load_reference
     directory = Path(directory)
     plan = json.loads((directory/'experiment_plan.json').read_text())
+    raw_variants = [key for key in ('original', 'optimized')
+                    if any(r.get('variant') == key for r in plan['wave_records'])]
+    if 'optimized' not in raw_variants:
+        raise ValueError('Experiment has no optimized wave arm')
     problem = Problem.load(directory/'config.json')
     reference = load_reference(directory/'reference.json', problem, plan['parameters'])
     ideal = np.asarray(reference['ideal_pressure_pa']).reshape(-1)
@@ -86,10 +90,12 @@ def generate_report(directory):
             raise ValueError('Result count differs from predeclared circuits')
         old = [(r, c) for r, c in zip(records, counts) if r.get('variant') == 'original']
         new = [(r, c) for r, c in zip(records, counts) if r.get('variant') != 'original']
-        a = analyze_pilot([r for r, _ in old], [c for _, c in old], shots, problem.trace_shape, mitigate=False)
         b = analyze_pilot([r for r, _ in new], [c for _, c in new], shots, problem.trace_shape)
-        values = {'original': a['raw_pressure_pa'], 'optimized': b['raw_pressure_pa']}
-        errors = {'original': a['raw_standard_error_pa'], 'optimized': b['raw_standard_error_pa']}
+        values = {'optimized': b['raw_pressure_pa']}
+        errors = {'optimized': b['raw_standard_error_pa']}
+        if old:
+            a = analyze_pilot([r for r, _ in old], [c for _, c in old], shots, problem.trace_shape, mitigate=False)
+            values['original'], errors['original'] = a['raw_pressure_pa'], a['raw_standard_error_pa']
         if b['mitigated'] is not None:
             values['corrected'] = b['mitigated']['pressure_pa']
             errors['corrected'] = b['mitigated']['standard_error_pa']
@@ -111,12 +117,12 @@ def generate_report(directory):
     if not rounds:
         raise ValueError('No saved hardware counts; no report or placeholder results generated')
     accepted = all(row['calibration_checks_passed'] for row in rounds)
-    variants = list(LABELS) if accepted else ['original', 'optimized']
+    variants = raw_variants+(['corrected'] if accepted else [])
     means = {key: np.mean([np.asarray(row['pressure_pa'][key]).reshape(-1) for row in rounds], axis=0) for key in variants}
     se = {key: np.sqrt(np.sum([np.asarray(row['standard_error_pa'][key]).reshape(-1)**2 for row in rounds], axis=0))/len(rounds) for key in variants}
     scores = {key: {'rmse_vs_ideal_pa': rmse(mean, ideal), 'rmse_vs_classical_pa': rmse(mean, classical)} for key, mean in means.items()}
     resources = {}
-    for variant in ('original', 'optimized'):
+    for variant in raw_variants:
         wave_records = [r for r in plan['wave_records'] if r['variant'] == variant]
         resources[variant] = {
             'wave_circuits_per_repetition': len(wave_records),
@@ -140,6 +146,8 @@ def generate_report(directory):
                 scores[key]['rmse_interval_95_pa'] = np.quantile(distribution[key], [0.025, 0.975]).tolist()
             for name, before, after in (('compilation_and_construction', 'original', 'optimized'),
                                         ('readout_mitigation', 'optimized', 'corrected')):
+                if before not in variants:
+                    continue
                 delta = distribution[before]-distribution[after]
                 lower, upper = np.quantile(delta, [0.025, 0.975])
                 initial = scores[before]['rmse_vs_ideal_pa']
@@ -199,7 +207,7 @@ def write_display(directory, problem, result):
     for index in range(points):
         svg.append(f'<text x="{x(index)-5:.2f}" y="370" font-size="12">{index+1}</text>')
         svg.append(f'<path d="M{x(index)-7:.2f} {y(result["ideal_pressure_pa"][index]):.2f}h14" stroke="{COLORS["ideal"]}" stroke-width="3"/>')
-        for offset, key in zip((-9, 0, 9), keys):
+        for offset, key in zip(np.linspace(-9, 9, len(keys)), keys):
             mean, standard_error = result['pressure_pa'][key][index], result['standard_error_pa'][key][index]
             px, color = x(index)+offset, COLORS[key]
             svg.append(f'<path d="M{px:.2f} {y(mean-1.96*standard_error):.2f}V{y(mean+1.96*standard_error):.2f}" stroke="{color}"/><circle cx="{px:.2f}" cy="{y(mean):.2f}" r="4" fill="{color}"/>')
@@ -210,12 +218,16 @@ def write_display(directory, problem, result):
     resources = result['circuit_resources']
     resource_rows = ''.join(f'<tr><td>{LABELS[key]}</td><td>{resources[key]["wave_circuits_per_repetition"]}</td>'
                            f'<td>{resources[key]["two_qubit_gates_per_repetition"]}</td>'
-                           f'<td>{resources[key]["maximum_circuit_depth"]}</td></tr>' for key in ('original', 'optimized'))
+                           f'<td>{resources[key]["maximum_circuit_depth"]}</td></tr>'
+                           for key in ('original', 'optimized') if key in resources)
     comparisons = ''.join(f'<li>{escape(name.replace("_", " "))}: {entry["error_reduction_percent"]:.2f}% lower RMSE; {escape(entry["assessment_under_iid_model"])}. '
                           f'95% RMSE-reduction interval: {entry["rmse_reduction_interval_95_pa"][0]:.4g} to {entry["rmse_reduction_interval_95_pa"][1]:.4g} Pa.</li>'
                           for name, entry in result['comparisons'].items() if entry['error_reduction_percent'] is not None)
     rounds = ''.join(f'<tr><td>{row["repetition"]}</td><td>{escape(row["job_id"])}</td><td>{row["calibration_checks_passed"]}</td>'
-                     +''.join(f'<td>{row["rmse_vs_ideal_pa"].get(key, "unavailable")}</td>' for key in LABELS)+'</tr>' for row in result['rounds'])
+                     +''.join(f'<td>{row["rmse_vs_ideal_pa"].get(key, "unavailable")}</td>' for key in keys)+'</tr>' for row in result['rounds'])
+    round_headers = ''.join(f'<th>{LABELS[key]} RMSE</th>' for key in keys)
+    original_note = ('Original versus optimized combines construction and compilation choices.'
+                     if 'original' in resources else 'The original deep circuit was not included; no measured compilation improvement is claimed.')
     legend = ' · '.join(f'<span style="color:{COLORS[key]}">{LABELS[key]}</span>' for key in keys)+' · Black: noiseless circuit'
     status = 'Complete' if result['complete'] else 'Partial — do not present as the completed campaign'
     usage = 'unavailable' if result['reported_qpu_seconds'] is None else f'{result["reported_qpu_seconds"]:.2f} seconds'
@@ -228,8 +240,8 @@ def write_display(directory, problem, result):
 <ul>{comparisons}</ul><p>{escape(result['uncertainty'])}</p><p>Uncertainty analysis error: {escape(str(result['uncertainty_failure']))}. Passing calibration checks alone does not demonstrate improvement.</p>
 <h2>Circuit resources</h2><table><tr><th>Method</th><th>Wave circuits per repetition</th><th>Total two-qubit gates per repetition</th><th>Maximum circuit depth</th></tr>{resource_rows}</table>
 <p>Readout mitigation adds {resources['readout_calibration']['circuits_per_repetition']} calibration circuits and {resources['readout_calibration']['shots_per_repetition']} calibration shots per repetition, with no additional wave shots. Shared job metrics do not isolate calibration QPU time.</p>
-<h2>All completed repetitions</h2><table><tr><th>Repetition</th><th>IBM job ID</th><th>Calibration accepted</th><th>Original RMSE</th><th>Optimized RMSE</th><th>Corrected RMSE</th></tr>{rounds}</table>
-<p>Original versus optimized combines circuit construction and compilation choices. Raw versus corrected uses identical optimized wave counts. No points are clipped or selected for favorable error reduction. The noiseless reference is never used to fit the correction.</p></html>'''
+<h2>All completed repetitions</h2><table><tr><th>Repetition</th><th>IBM job ID</th><th>Calibration accepted</th>{round_headers}</tr>{rounds}</table>
+<p>{original_note} Raw versus corrected uses identical optimized wave counts. No points are clipped or selected for favorable error reduction. The noiseless reference is never used to fit the correction.</p></html>'''
     (directory/'experiment.html').write_text(html)
 
 

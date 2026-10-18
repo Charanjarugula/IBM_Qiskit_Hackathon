@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "description": "Small first execution target; two unknown speeds",
+  "description": "Two-update 1D smoke test; not a converged reconstruction. Also usable for fixed-map forward comparisons.",
   "shape": [2],
   "spacing_m": 0.005,
   "reference_speed_m_s": 1500,

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "description": "Time-dependent bipolar pressure-rate pulse; explicitly integrated in both solvers",
+  "description": "Bipolar pressure-rate forward benchmark; two-update inversion is only a smoke test",
   "shape": [2],
   "spacing_m": 0.005,
   "reference_speed_m_s": 1500,

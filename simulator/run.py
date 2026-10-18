@@ -21,6 +21,10 @@ def main():
     parser.add_argument('--max-data-qubits', type=int, default=7)
     parser.add_argument('--max-gates', type=int, default=500000)
     parser.add_argument('--noise-probability', type=float, default=0.0)
+    parser.add_argument('--method', choices=['auto', 'statevector', 'density_matrix'], default='auto')
+    parser.add_argument('--threads', type=int, default=1)
+    parser.add_argument('--max-seconds', type=float, default=1800,
+                        help='Soft budget, checked between circuits; partial counts retained')
     args = parser.parse_args()
     if not args.execute:
         parser.error('No execution performed. Supply --execute only when authorized.')
@@ -51,14 +55,16 @@ def main():
     try:
         solver = GateForward(problem, evidence, args.shots, args.seed,
                              args.max_circuits, args.max_total_shots,
-                             args.max_data_qubits, args.max_gates, args.noise_probability)
+                             args.max_data_qubits, args.max_gates, args.noise_probability,
+                             args.method, args.threads, args.max_seconds)
         parameters, _ = invert(problem, observed, solver.predict,
                                lambda history: evidence.write('history.json', history))
         evidence.write('reconstruction.json', {
             'parameters': parameters.tolist(),
             'sound_speed_m_s': problem.speeds(parameters).reshape(problem.grid.shape).tolist(),
             'meaning': 'Estimated sound speed; not a diagnostic image'})
-        evidence.finish(solver.statistics())
+        evidence.finish({**solver.statistics(),
+                         'gradient': 'classical finite differences of gate-sampled pressure loss'})
     except BaseException as error:
         evidence.write('failure.json', {'type': type(error).__name__, 'message': str(error)})
         raise

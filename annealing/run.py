@@ -157,9 +157,13 @@ def main(argv=None):
                     and row['error_vs_exact']['relative_l2'] <= .01 for row in good)}
         evidence.write('report.json', report)
         failed = any(row['status'] != 'completed' for row in rows)
+        accurate = all(row['all_repeats_within_one_percent'] for row in report['algorithms'].values())
         evidence.finish({'status': 'incomplete' if failed else 'completed',
+                         'accuracy_checks_passed': accurate, 'relative_l2_target': 0.01,
                          'quantum_hardware_jobs': 0, 'total_repeats': len(rows),
                          'scope': 'Forward-wave experiment; inspect accuracy, including failed repeats'})
+        print(f'All repeats within 1% of exact pressure: {accurate}. '
+              'Completed does not mean accuracy validated.', flush=True)
         if failed:
             raise RuntimeError('Some repeats failed; inspect report.json, not just successful runs')
     except BaseException as error:

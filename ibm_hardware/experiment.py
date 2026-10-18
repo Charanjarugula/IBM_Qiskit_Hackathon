@@ -1,6 +1,6 @@
-"""Three fixed repetitions of original, optimized, and readout-corrected pressure.
+"""Three fixed repetitions of optimized raw and readout-corrected pressure.
 
-Original -> optimized includes both circuit construction and compilation choices.
+An optional original arm includes both circuit construction and compilation differences.
 Optimized raw -> corrected uses identical wave counts and isolates readout processing.
 No tissue reconstruction or quantum advantage is claimed by this experiment.
 """
@@ -14,12 +14,15 @@ from .readout import calibration_circuits
 REPETITIONS = 3
 
 
-def prepare_experiment(solver, parameters, reference):
+def prepare_experiment(solver, parameters, reference, include_original=False):
     p, limits = solver.problem, solver.limits
-    # Reproduce the previously released builder and level-1 compilation baseline.
-    old_logical, original, old_records = compile_call(
-        p, parameters, solver.backend, limits, solver.seed, solver.initial_layout,
-        optimization_level=1, direct_control=False)
+    old_logical, original, old_records = [], [], []
+    if include_original:
+        # Explicit opt-in: the deeper baseline may exceed ceilings. Never silently
+        # drop an arm after its inclusion has been requested, or relax the limits.
+        old_logical, original, old_records = compile_call(
+            p, parameters, solver.backend, limits, solver.seed, solver.initial_layout,
+            optimization_level=1, direct_control=False)
     # Keep the optimized arm inside the pilot's stricter gate ceilings.
     optimized_limits = replace(limits, max_compiled_gates=min(limits.max_compiled_gates, 2000),
         max_depth=min(limits.max_depth, 1000), max_two_qubit_gates=min(limits.max_two_qubit_gates, 300))
@@ -27,9 +30,10 @@ def prepare_experiment(solver, parameters, reference):
         p, parameters, solver.backend, optimized_limits, solver.seed, solver.initial_layout,
         solver.evidence, extra_wave_circuits=len(original), repetitions=REPETITIONS)
     fields = ('source_index', 'time_index', 'receiver_index', 'evolution_time_s', 'physical_scale_pa')
-    if (len(original) != len(optimized) or len(optimized) != reference['wave_circuits']
-            or any(tuple(a[k] for k in fields) != tuple(b[k] for k in fields)
-                   for a, b in zip(old_records, new_records))):
+    if (len(optimized) != reference['wave_circuits'] or (include_original and
+            (len(original) != len(optimized)
+             or any(tuple(a[k] for k in fields) != tuple(b[k] for k in fields)
+                    for a, b in zip(old_records, new_records))))):
         raise ValueError('Original and optimized arms do not describe the same wave observations')
     qubits = {record['readout_qubit'] for record in new_records}
     first, first_records = calibration_circuits(solver.backend, qubits, repeat=0)
@@ -57,11 +61,13 @@ def prepare_experiment(solver, parameters, reference):
     solver.evidence.write('reference.json', reference)
     solver.evidence.write('experiment_plan.json', {
         'backend': solver.backend.name, 'parameters': list(parameters),
+        'include_original_arm': include_original,
         'repetitions': REPETITIONS, 'shots_per_circuit': limits.shots, 'seed': solver.seed,
         'records_by_repetition': batch_records, 'wave_records': wave_records,
         'isa_qpy_sha256': hashes, 'logical_qpy_sha256': logical_hash,
         'primary_comparison': 'Optimized raw versus readout-corrected RMSE against noiseless circuit',
-        'secondary_comparison': 'Original raw versus optimized raw; combines construction and compilation',
+        'secondary_comparison': ('Original raw versus optimized raw; combines construction and compilation'
+                                 if include_original else None),
         'uncertainty_samples': 2000,
         'scope': 'Reduced forward wave propagation; no reconstruction or speedup claim'})
     solver.evidence.write('resource_plan.json', {
@@ -74,8 +80,8 @@ def prepare_experiment(solver, parameters, reference):
     return batches, batch_records
 
 
-def run_experiment(solver, parameters, reference):
-    batches, records = prepare_experiment(solver, parameters, reference)
+def run_experiment(solver, parameters, reference, include_original=False):
+    batches, records = prepare_experiment(solver, parameters, reference, include_original)
     if not solver.submit_hardware:
         solver.evidence.finish({'status': 'experiment_prepared_only', 'jobs_submitted': 0})
         return
