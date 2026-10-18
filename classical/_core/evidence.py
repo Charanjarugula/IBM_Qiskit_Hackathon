@@ -26,12 +26,12 @@ class Evidence:
         root = Path(__file__).resolve().parents[2]
         versions = {}
         for name in ('numpy', 'scipy', 'stride', 'devito', 'qiskit', 'qiskit-aer',
-                     'qiskit-ibm-runtime'):
+                     'qiskit-ibm-runtime', 'dimod', 'dwave-samplers'):
             try:
                 versions[name] = importlib.metadata.version(name)
             except importlib.metadata.PackageNotFoundError:
                 pass
-        files = [p for package in ('classical', 'simulator', 'ibm_hardware')
+        files = [p for package in ('classical', 'simulator', 'ibm_hardware', 'annealing')
                  for p in (root/package).rglob('*.py')]
         hashes = {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
         for source in files:

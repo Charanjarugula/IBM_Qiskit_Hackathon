@@ -1,0 +1,3 @@
+-r ../classical/requirements.txt
+dimod==0.12.22
+dwave-samplers==1.8.0
