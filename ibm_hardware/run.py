@@ -4,8 +4,9 @@ Use python -m ibm_hardware.run from the repository root. Preparation requires
 --execute; forward/invert also require --submit-hardware. Use the same reduced
 classical/configs/*.json and observations as the classical and simulator runs.
 For the first experiment use --mode pilot with classical/configs/small_1d.json.
+Both pilot and experiment require --reference <simulator.reference output>.
 Without --submit-hardware it only prepares the pilot and records its resource plan.
-Use --mode experiment --reference <simulator.reference output> for the three-repeat
+Use --mode experiment for the three-repeat
 comparison. This also only prepares unless --submit-hardware is supplied.
 """
 import argparse
@@ -22,7 +23,7 @@ def parser():
     cli.add_argument('--account', help='Optional saved account name; never put a token in CLI arguments')
     cli.add_argument('--output', required=True)
     cli.add_argument('--observations', help='Required only for inversion; same file as classical/Aer')
-    cli.add_argument('--reference', help='Verified simulator.reference JSON; required only for experiment')
+    cli.add_argument('--reference', help='Verified simulator.reference JSON; required for pilot/experiment')
     cli.add_argument('--limits', help='Defaults to the selected mode’s limits JSON')
     cli.add_argument('--parameters', type=float, nargs='+', help='Forward/preparation speeds as ratios')
     cli.add_argument('--initial-layout', type=int, nargs='+', help='Physical qubits; ancilla is first')
@@ -46,8 +47,9 @@ def main(argv=None):
         cli.error('Inversion needs --observations and uses the shared configured initial guess')
     if args.mode != 'invert' and args.observations:
         cli.error('Observations are only used by inversion; pilot predictions are not fitted to a reference')
-    if (args.mode == 'experiment') != bool(args.reference):
-        cli.error('Experiment mode requires --reference; other modes do not use it')
+    needs_reference = args.mode in ('pilot', 'experiment')
+    if needs_reference != bool(args.reference):
+        cli.error('Pilot and experiment require --reference; other modes do not use it')
     if Path(args.output).exists():
         cli.error('Output directory exists; use a new path')
     if args.seed_transpiler < 0:
@@ -67,7 +69,7 @@ def main(argv=None):
     resource_plan = plan(problem, limits, args.mode)
     observed = load_observations(args.observations, problem) if args.mode == 'invert' else None
     reference = None
-    if args.mode == 'experiment':
+    if needs_reference:
         from simulator.reference import load_reference
         reference = load_reference(args.reference, problem, parameters)
 
@@ -107,6 +109,7 @@ def main(argv=None):
             return
         if args.mode == 'pilot':
             from .pilot import run_pilot
+            evidence.write('reference.json', reference)
             run_pilot(solver, parameters)
             return
         if args.mode == 'prepare':
