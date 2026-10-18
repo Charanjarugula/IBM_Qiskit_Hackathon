@@ -7,8 +7,9 @@ For the first experiment use --mode pilot with ibm_hardware/pilot_1d.json.
 Both pilot and experiment require --reference <simulator.reference output>.
 While that verification is pending, ibm_hardware.preflight can compile but cannot submit.
 Without --submit-hardware it only prepares the pilot and records its resource plan.
-Use --mode experiment for the three-repeat
-comparison. This also only prepares unless --submit-hardware is supplied.
+Use --mode experiment for three repeats of optimized raw versus readout-corrected
+pressure. --include-original-arm additionally compares the deeper old circuit;
+it must independently fit the same limits. Preparation does not submit jobs.
 """
 import argparse
 import hashlib
@@ -29,6 +30,8 @@ def parser():
     cli.add_argument('--parameters', type=float, nargs='+', help='Forward/preparation speeds as ratios')
     cli.add_argument('--initial-layout', type=int, nargs='+', help='Physical qubits; ancilla is first')
     cli.add_argument('--seed-transpiler', type=int, default=7)
+    cli.add_argument('--include-original-arm', action='store_true',
+                     help='Experiment only: add the deep original circuit if it fits all limits')
     cli.add_argument('--execute', action='store_true', help='Authorize preparation/connection when ready')
     cli.add_argument('--submit-hardware', action='store_true', help='Separately authorize actual QPU jobs')
     return cli
@@ -44,6 +47,8 @@ def main(argv=None):
         cli.error('Actual IBM jobs require --submit-hardware as well as --execute')
     if args.mode == 'prepare' and args.submit_hardware:
         cli.error('Preparation cannot submit hardware jobs')
+    if args.include_original_arm and args.mode != 'experiment':
+        cli.error('--include-original-arm is only valid for --mode experiment')
     if args.mode == 'invert' and (not args.observations or args.parameters is not None):
         cli.error('Inversion needs --observations and uses the shared configured initial guess')
     if args.mode != 'invert' and args.observations:
@@ -67,7 +72,7 @@ def main(argv=None):
     problem, limits = Problem.load(args.config), Limits.load(args.limits)
     parameters = problem.initial if args.parameters is None else args.parameters
     problem.speeds(parameters)
-    resource_plan = plan(problem, limits, args.mode)
+    resource_plan = plan(problem, limits, args.mode, args.include_original_arm)
     observed = load_observations(args.observations, problem) if args.mode == 'invert' else None
     reference = None
     if needs_reference:
@@ -106,7 +111,7 @@ def main(argv=None):
                                        'operation_names': sorted(backend.operation_names)})
         if args.mode == 'experiment':
             from .experiment import run_experiment
-            run_experiment(solver, parameters, reference)
+            run_experiment(solver, parameters, reference, args.include_original_arm)
             return
         if args.mode == 'pilot':
             from .pilot import run_pilot

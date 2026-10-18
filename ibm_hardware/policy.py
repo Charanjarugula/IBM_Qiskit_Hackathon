@@ -36,13 +36,13 @@ class Limits:
             raise ValueError('Job count or reserved execution-time ceiling exceeded')
 
 
-def plan(problem, limits, mode):
+def plan(problem, limits, mode, include_original=False):
     per_call = len(problem.sources)*len(problem.receivers)*sum(len(problem.impulses(t)) for t in problem.times)
     calls = (problem.config['optimizer']['iterations']*(1+2*len(problem.initial))+1
              if mode == 'invert' else 1)
     if mode in ('pilot', 'experiment'):
         # Minimum four readout calibrations; the final count depends on placement.
-        per_call = per_call*(2 if mode == 'experiment' else 1)+4
+        per_call = per_call*(2 if mode == 'experiment' and include_original else 1)+4
         calls = 3 if mode == 'experiment' else 1
     jobs = calls*ceil(per_call/limits.circuits_per_job)
     circuits = calls*per_call

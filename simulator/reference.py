@@ -1,4 +1,4 @@
-"""Create the small noiseless reference on the simulator machine, never on a QPU.
+"""Verify noiseless 1D/4x4 circuits on the simulator machine, never on a QPU.
 
 python -m simulator.reference --config classical/configs/small_1d.json \
     --parameters 1 1.1 --output runs/reference.json --execute
@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+from time import perf_counter
 
 
 def source_hashes():
@@ -41,6 +42,41 @@ def load_reference(path, problem, parameters):
     return reference
 
 
+def verify_rotations(n, terms):
+    """Check each controlled Pauli building block against its analytic unitary.
+
+    Composition preserves equivalence. Avoid constructing the enormous generic
+    controlled circuit's full unitary for every propagation duration in 2D.
+    """
+    import numpy as np
+    from qiskit import QuantumCircuit
+    from qiskit.quantum_info import Operator, Pauli, Statevector
+    from .circuits import append_rotation, evolution, pressure_interferometer
+    maximum = 0.0
+    angle = 0.219
+    for label in sorted({label for label, _ in terms} | {'I'*n, 'Y'+'I'*(n-1)}):
+        circuit = QuantumCircuit(n+1)
+        append_rotation(circuit, label, angle, controlled=True)
+        expected = np.eye(2**(n+1), dtype=complex)
+        expected[1::2, 1::2] = (np.cos(angle)*np.eye(2**n)
+                                -1j*np.sin(angle)*Pauli(label).to_matrix())
+        maximum = max(maximum, float(np.max(np.abs(Operator(circuit).data-expected))))
+    # Independently check the signed-amplitude interferometer, including negatives
+    # and a controlled identity phase, without evolving a large wave problem.
+    for terms_probe in ([('Y', -0.29)], [('I', 0.17), ('Y', 0.29)]):
+        u = evolution(1, terms_probe, 0.9, 0.3)
+        controlled = evolution(1, terms_probe, 0.9, 0.3, controlled=True)
+        matrix = Operator(u).data
+        for source in (0, 1):
+            for receiver in (0, 1):
+                circuit = pressure_interferometer(controlled, source, receiver, controlled=True)
+                state = Statevector.from_instruction(circuit.remove_final_measurements(inplace=False))
+                probabilities = state.probabilities(qargs=[0])
+                maximum = max(maximum, abs(float(probabilities[0]-probabilities[1])
+                                           -float(matrix[receiver, source].real)))
+    return maximum
+
+
 def verify_readout():
     """Deterministic assignment-channel checks, executed only with the reference."""
     import numpy as np
@@ -72,8 +108,8 @@ def build_reference(problem, parameters):
     from scipy.linalg import expm
     from qiskit.quantum_info import Operator, Statevector
     from classical.reference import ClassicalForward
-    from .circuits import pauli_terms, evolution, pressure_interferometer
-    n, terms = pauli_terms(problem.hamiltonian(parameters), max_data_qubits=3)
+    from .circuits import pauli_terms, evolution
+    n, terms = pauli_terms(problem.hamiltonian(parameters), max_data_qubits=6)
     count = len(problem.sources)*len(problem.receivers)*sum(len(problem.impulses(t)) for t in problem.times)
     if not 1 <= count <= 64:
         raise ValueError('Reference is limited to 1–64 small pressure circuits')
@@ -83,30 +119,40 @@ def build_reference(problem, parameters):
     probe = evolution(1, [('I', 0.17), ('Y', -0.29)], 0.9, 0.3, controlled=True)
     expected = np.eye(4, dtype=complex)
     expected[np.ix_([1, 3], [1, 3])] = expm(-0.9j*(0.17*np.eye(2)-0.29*np.array([[0, -1j], [1j, 0]])))
-    cache, operator_error = {}, float(np.max(np.abs(Operator(probe).data-expected)))
+    cache, operator_error = {}, max(float(np.max(np.abs(Operator(probe).data-expected))),
+                                    verify_rotations(n, terms))
     readout_verified = verify_readout()
     for si, source in enumerate(problem.sources):
         for ti, time in enumerate(problem.times):
             for duration, increment in problem.impulses(time):
                 if duration not in cache:
                     step = problem.config['trotter_step_s']
-                    if 4*np.ceil(duration/step)*len(terms)*(6*n+1) > 100000:
+                    # The shipped 4x4 case has 992 terms and a 3,523,584
+                    # conservative operation bound; keep a finite ceiling.
+                    if 4*np.ceil(duration/step)*len(terms)*(6*n+1) > 4000000:
                         raise ValueError('Reference construction exceeds the small-circuit budget')
-                    old = evolution(n, terms, duration, step).to_gate().control(1)
                     current = evolution(n, terms, duration, step, controlled=True)
                     half = evolution(n, terms, duration, step/2, controlled=True)
-                    error = float(np.max(np.abs(Operator(old).data-Operator(current).data)))
-                    operator_error = max(operator_error, error)
-                    cache[duration] = current, half
-                current, half = cache[duration]
-                for ri, receiver in enumerate(problem.receivers):
-                    scale = increment*speeds[receiver]/speeds[source]
-                    for circuit, output in ((current, pressure), (half, finer)):
-                        qc = pressure_interferometer(circuit, int(source), int(receiver), controlled=True)
-                        state = Statevector.from_instruction(qc.remove_final_measurements(inplace=False))
-                        probabilities = state.probabilities(qargs=[0])
-                        output[si, ti, ri] += scale*float(probabilities[0]-probabilities[1])
+                    if n <= 3:
+                        old = evolution(n, terms, duration, step).to_gate().control(1)
+                        error = float(np.max(np.abs(Operator(old).data-Operator(current).data)))
+                        operator_error = max(operator_error, error)
+                    cache[duration] = current, half, evolution(n, terms, duration, step)
+                current, half, uncontrolled = cache[duration]
+                # Control=1, source basis state. Read signed amplitudes directly
+                # for the noiseless reference; actual shot runs use interferometers.
+                initial = Statevector.from_int(2*int(source)+1, 2**(n+1))
+                state = initial.evolve(current).data
+                direct = Statevector.from_int(int(source), 2**n).evolve(uncontrolled).data
+                operator_error = max(operator_error, float(np.max(np.abs(state[1::2]-direct))),
+                                     float(np.max(np.abs(state[0::2]))))
+                finer_state = initial.evolve(half).data
+                scale = increment*speeds[problem.receivers]/speeds[source]
+                pressure[si, ti] += scale*state[2*problem.receivers+1].real
+                finer[si, ti] += scale*finer_state[2*problem.receivers+1].real
+    started = perf_counter()
     exact = ClassicalForward(problem).predict(parameters).mean
+    exact_seconds = perf_counter()-started
     norm = float(np.linalg.norm(exact))
     if norm <= 1e-12:
         raise ValueError('Near-zero reference does not support relative-error validation')
@@ -120,6 +166,8 @@ def build_reference(problem, parameters):
             'data_qubits': n, 'wave_circuits': count, 'trace_shape': list(problem.trace_shape),
             'ideal_pressure_pa': pressure.tolist(), 'classical_pressure_pa': exact.tolist(),
             'operator_max_abs_error': operator_error, 'relative_trotter_error': error,
+            'control_verification': 'Analytic controlled Pauli blocks, signed readout probes, source states; full generic unitary also checked for <=3 data qubits',
+            'classical_forward_seconds': exact_seconds,
             'relative_trotter_error_half_step': finer_error, 'verified': bool(verified),
             'readout_verified': readout_verified,
             'scope': 'Noiseless circuit versus exact reduced discrete wave model; no hardware execution'}
