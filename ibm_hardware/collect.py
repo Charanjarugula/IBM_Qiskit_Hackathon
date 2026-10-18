@@ -29,7 +29,13 @@ def main():
         raise ValueError('Retrieved job backend differs from recorded submission')
     output = Evidence(directory/(prefix+'_recovered'), directory/'config.json',
                       'ibm_hardware_retrieval')
-    save_result(output, prefix, job.result(), intent['records'], intent['shots'])
+    counts = save_result(output, prefix, job.result(), intent['records'], intent['shots'])
+    if options.get('mode') == 'pilot':
+        from classical._core.problem import Problem
+        from .readout import analyze_pilot
+        problem = Problem.load(directory/'config.json')
+        output.write('pilot_pressure.json', analyze_pilot(
+            intent['records'], counts, intent['shots'], problem.trace_shape))
     output.finish({'job_id': submitted['job_id'], 'new_jobs_submitted': 0})
 
 

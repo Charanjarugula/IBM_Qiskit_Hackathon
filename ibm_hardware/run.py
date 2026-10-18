@@ -3,6 +3,8 @@
 Use python -m ibm_hardware.run from the repository root. Preparation requires
 --execute; forward/invert also require --submit-hardware. Use the same reduced
 classical/configs/*.json and observations as the classical and simulator runs.
+For the first experiment use --mode pilot with classical/configs/small_1d.json.
+Without --submit-hardware it only prepares the pilot and records its resource plan.
 """
 import argparse
 import hashlib
@@ -11,14 +13,14 @@ from pathlib import Path
 
 def parser():
     cli = argparse.ArgumentParser(description=__doc__)
-    cli.add_argument('--mode', choices=['prepare', 'forward', 'invert'], default='prepare')
+    cli.add_argument('--mode', choices=['prepare', 'pilot', 'forward', 'invert'], default='prepare')
     cli.add_argument('--config', required=True)
     cli.add_argument('--backend', required=True, help='Exact IBM backend name; never auto-selected')
     cli.add_argument('--instance', required=True, help='Explicit IBM service instance CRN')
     cli.add_argument('--account', help='Optional saved account name; never put a token in CLI arguments')
     cli.add_argument('--output', required=True)
     cli.add_argument('--observations', help='Required only for inversion; same file as classical/Aer')
-    cli.add_argument('--limits', default=str(Path(__file__).with_name('limits.json')))
+    cli.add_argument('--limits', help='Defaults to pilot_limits.json for pilot; limits.json otherwise')
     cli.add_argument('--parameters', type=float, nargs='+', help='Forward/preparation speeds as ratios')
     cli.add_argument('--initial-layout', type=int, nargs='+', help='Physical qubits; ancilla is first')
     cli.add_argument('--seed-transpiler', type=int, default=7)
@@ -33,12 +35,14 @@ def main(argv=None):
     # Fail before SDK imports, credentials, compilation or backend calls.
     if not args.execute:
         cli.error('Nothing executed. --execute is required even for preparation.')
-    if args.mode != 'prepare' and not args.submit_hardware:
+    if args.mode in ('forward', 'invert') and not args.submit_hardware:
         cli.error('Actual IBM jobs require --submit-hardware as well as --execute')
     if args.mode == 'prepare' and args.submit_hardware:
         cli.error('Preparation cannot submit hardware jobs')
     if args.mode == 'invert' and (not args.observations or args.parameters is not None):
         cli.error('Inversion needs --observations and uses the shared configured initial guess')
+    if args.mode != 'invert' and args.observations:
+        cli.error('Observations are only used by inversion; pilot predictions are not fitted to a reference')
     if Path(args.output).exists():
         cli.error('Output directory exists; use a new path')
     if args.seed_transpiler < 0:
@@ -49,6 +53,8 @@ def main(argv=None):
     from classical._core.problem import Problem, load_observations
     from classical._core.evidence import Evidence
     from .policy import Limits, plan, raw_sampler_options
+    if args.limits is None:
+        args.limits = str(Path(__file__).with_name('pilot_limits.json' if args.mode == 'pilot' else 'limits.json'))
     problem, limits = Problem.load(args.config), Limits.load(args.limits)
     parameters = problem.initial if args.parameters is None else args.parameters
     problem.speeds(parameters)
@@ -77,13 +83,18 @@ def main(argv=None):
             'inverse_problem_signature': problem.comparison_signature,
             'observations_sha256': (hashlib.sha256(Path(args.observations).read_bytes()).hexdigest()
                                     if observed is not None else None),
-            'objective': 'variance_corrected_pressure_l2_v1',
-            'error_mitigation': False, 'error_correction': False})
+            'objective': ('forward_pressure_pilot' if args.mode == 'pilot'
+                          else 'variance_corrected_pressure_l2_v1'),
+            'readout_mitigation_requested': args.mode == 'pilot', 'error_correction': False})
         write_runtime_json(evidence, 'backend_configuration.json', backend.configuration().to_dict())
         properties = backend.properties()
         write_runtime_json(evidence, 'backend_properties.json', None if properties is None else properties.to_dict())
         evidence.write('backend.json', {'name': backend.name, 'num_qubits': backend.num_qubits,
                                        'operation_names': sorted(backend.operation_names)})
+        if args.mode == 'pilot':
+            from .pilot import run_pilot
+            run_pilot(solver, parameters)
+            return
         if args.mode == 'prepare':
             _, records = solver.prepare(parameters)
             evidence.finish({'status': 'prepared_only', 'jobs_submitted': 0,

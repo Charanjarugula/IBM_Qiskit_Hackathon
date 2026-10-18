@@ -1,6 +1,7 @@
 """Build the shared pressure circuit, then map it to an explicit backend target."""
 from math import ceil
 import numpy as np
+from qiskit.exceptions import QiskitError
 from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager
 from simulator.circuits import pauli_terms, evolution, pressure_interferometer
 
@@ -11,10 +12,13 @@ def rotation_gate_bound(terms, steps):
         active = sum(letter != 'I' for letter in label)
         if active:
             per_sweep += 2*label.count('X')+4*label.count('Y')+2*(active-1)+1
+        else:
+            per_sweep += 1  # Identity terms become phase gates on the control.
     return 2*steps*per_sweep
 
 
-def compile_call(problem, parameters, backend, limits, seed, initial_layout=None):
+def compile_call(problem, parameters, backend, limits, seed, initial_layout=None,
+                 optimization_level=1):
     n, terms = pauli_terms(problem.hamiltonian(parameters), limits.max_data_qubits)
     if n+1 > backend.num_qubits:
         raise ValueError('Backend lacks data register plus readout ancilla')
@@ -22,7 +26,7 @@ def compile_call(problem, parameters, backend, limits, seed, initial_layout=None
         if (len(initial_layout) != n+1 or len(set(initial_layout)) != n+1
                 or any(q < 0 or q >= backend.num_qubits for q in initial_layout)):
             raise ValueError('Layout must map each logical qubit, including ancilla, uniquely')
-    pm = generate_preset_pass_manager(backend=backend, optimization_level=1,
+    pm = generate_preset_pass_manager(backend=backend, optimization_level=optimization_level,
             approximation_degree=1.0, seed_transpiler=seed, initial_layout=initial_layout)
     c = problem.speeds(parameters)
     logical, compiled, records = [], [], []
@@ -32,9 +36,9 @@ def compile_call(problem, parameters, backend, limits, seed, initial_layout=None
                 steps = max(1, ceil(duration/problem.config['trotter_step_s']))
                 if rotation_gate_bound(terms, steps) > limits.max_logical_gates:
                     raise ValueError('Logical evolution exceeds construction budget')
-                evo = evolution(n, terms, duration, problem.config['trotter_step_s'])
+                evo = evolution(n, terms, duration, problem.config['trotter_step_s'], controlled=True)
                 for ri, receiver in enumerate(problem.receivers):
-                    qc = pressure_interferometer(evo, int(source), int(receiver))
+                    qc = pressure_interferometer(evo, int(source), int(receiver), controlled=True)
                     isa = pm.run(qc)
                     # Only the final ancilla measurement is allowed, with no postselection.
                     if isa.num_clbits != 1 or len(isa.cregs) != 1 or isa.cregs[0].size != 1:
@@ -73,7 +77,66 @@ def compile_call(problem, parameters, backend, limits, seed, initial_layout=None
                         'parameters': np.asarray(parameters).tolist(), 'data_qubits': n,
                         'readout_ancillas': 1, 'pauli_terms': len(terms), 'trotter_steps': steps,
                         'classical_register': isa.cregs[0].name, 'logical_to_physical': layout,
+                        'readout_qubit': layout[0], 'optimization_level': optimization_level,
+                        'seed_transpiler': seed,
                         'used_physical_qubits': sorted(used), 'depth': isa.depth(),
                         'two_qubit_gates': two_qubit, 'gates': isa.size(),
                         'operations': dict(isa.count_ops())})
     return logical, compiled, records
+
+
+def calibration_cost(circuit, backend):
+    """Ranking proxy from gate/readout calibration, NOT predicted circuit fidelity."""
+    exposure = 0.0
+    for instruction in circuit.data:
+        name = instruction.operation.name
+        if name == 'barrier':
+            continue
+        qubits = tuple(circuit.find_bit(q).index for q in instruction.qubits)
+        properties = backend.target[name][qubits]
+        error = None if properties is None else properties.error
+        if error is None or not np.isfinite(error) or not 0 <= error < 1:
+            raise ValueError(f'Missing or unusable calibration for {name}{qubits}')
+        exposure -= float(np.log1p(-error))
+    duration = float(circuit.estimate_duration(backend.target, unit='s'))
+    if not np.isfinite(duration) or duration <= 0:
+        raise ValueError('Missing or invalid circuit duration')
+    return exposure, duration
+
+
+def select_compilation(problem, parameters, backend, limits, seed, initial_layout, evidence):
+    """Compare five exact compilations locally; no primitives or hardware jobs."""
+    best, best_key, candidates = None, None, []
+    for level, candidate_seed in ((1, seed), (2, seed), (3, seed), (3, seed+1), (3, seed+2)):
+        row = {'optimization_level': level, 'seed_transpiler': candidate_seed}
+        try:
+            logical, circuits, records = compile_call(
+                problem, parameters, backend, limits, candidate_seed, initial_layout, level)
+            if not circuits:
+                raise ValueError('Pilot needs at least one nonzero source contribution')
+            costs = [calibration_cost(circuit, backend) for circuit in circuits]
+            readout_qubits = {record['readout_qubit'] for record in records}
+            total = len(circuits)+4*len(readout_qubits)
+            limits.check_totals(total, 1)
+            if total > limits.circuits_per_job:
+                raise ValueError('Pilot plus repeated calibrations must fit in one job')
+            key = (sum(cost[0] for cost in costs), sum(cost[1] for cost in costs),
+                   sum(record['two_qubit_gates'] for record in records))
+            row.update(calibration_exposure=key[0], total_wave_duration_s=key[1],
+                       two_qubit_gates=key[2], circuits_including_calibration=total)
+            for record, (exposure, duration) in zip(records, costs):
+                record.update(calibration_exposure=exposure, estimated_duration_s=duration)
+            if best_key is None or key < best_key:
+                best, best_key = (logical, circuits, records), key
+        except (ValueError, QiskitError) as error:
+            row['rejected'] = str(error)
+        candidates.append(row)
+    evidence.write('compilation_candidates.json', {
+        'candidates': candidates,
+        'ranking': 'Sum -log(1-error), then duration, then two-qubit gate count; heuristic only',
+        'selected': None if best is None else {
+            'optimization_level': best[2][0]['optimization_level'],
+            'seed_transpiler': best[2][0]['seed_transpiler']}})
+    if best is None:
+        raise ValueError('No calibrated compilation fits the pilot limits; no jobs submitted')
+    return best

@@ -48,9 +48,9 @@ class GateForward:
             for ti, time in enumerate(p.times):
                 for duration, pressure_increment in p.impulses(time):
                     # Each distinct pulse contribution is separately prepared and measured.
-                    evo = evolution(n, terms, duration, p.config['trotter_step_s'])
+                    evo = evolution(n, terms, duration, p.config['trotter_step_s'], controlled=True)
                     for ri, receiver in enumerate(p.receivers):
-                        qc = pressure_interferometer(evo, int(source), int(receiver))
+                        qc = pressure_interferometer(evo, int(source), int(receiver), controlled=True)
                         compiled = transpile(qc, basis_gates=['rz', 'sx', 'x', 'cx'],
                                              optimization_level=1, seed_transpiler=self.seed)
                         if compiled.size() > self.max_gates:
