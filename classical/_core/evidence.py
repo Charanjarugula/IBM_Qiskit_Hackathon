@@ -25,12 +25,13 @@ class Evidence:
         self.started = time.perf_counter()
         root = Path(__file__).resolve().parents[2]
         versions = {}
-        for name in ('numpy', 'scipy', 'stride', 'devito', 'qiskit', 'qiskit-aer'):
+        for name in ('numpy', 'scipy', 'stride', 'devito', 'qiskit', 'qiskit-aer',
+                     'qiskit-ibm-runtime'):
             try:
                 versions[name] = importlib.metadata.version(name)
             except importlib.metadata.PackageNotFoundError:
                 pass
-        files = [p for package in ('classical', 'simulator')
+        files = [p for package in ('classical', 'simulator', 'ibm_hardware')
                  for p in (root/package).rglob('*.py')]
         hashes = {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
         for source in files:
