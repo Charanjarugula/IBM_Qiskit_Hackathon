@@ -1,0 +1,14 @@
+{
+  "shots": 1024,
+  "max_data_qubits": 3,
+  "max_circuits": 40,
+  "max_total_shots": 40960,
+  "max_jobs": 1,
+  "circuits_per_job": 40,
+  "max_execution_seconds_per_job": 60,
+  "max_total_execution_seconds": 60,
+  "max_logical_gates": 100000,
+  "max_compiled_gates": 2000,
+  "max_depth": 1000,
+  "max_two_qubit_gates": 300
+}
