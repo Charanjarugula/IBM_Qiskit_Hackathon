@@ -1,0 +1,7 @@
+{
+  "inverse_problem_signature": "2dfaf45b5f0785f2ab1e01f4330554c7e87a1260f4afe1e94f6bd39e5a7e90f0",
+  "observations_sha256": null,
+  "objective": "forward_pressure_pilot",
+  "readout_mitigation_requested": true,
+  "error_correction": false
+}

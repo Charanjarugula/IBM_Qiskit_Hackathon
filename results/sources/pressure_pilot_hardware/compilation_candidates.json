@@ -1,0 +1,49 @@
+{
+  "candidates": [
+    {
+      "optimization_level": 1,
+      "seed_transpiler": 7,
+      "calibration_exposure": 3.7685217422873363,
+      "total_wave_duration_s": 0.0001830479999999999,
+      "two_qubit_gates": 1674,
+      "circuits_including_calibration": 12
+    },
+    {
+      "optimization_level": 2,
+      "seed_transpiler": 7,
+      "calibration_exposure": 3.1931699632207335,
+      "total_wave_duration_s": 0.00016787199999999993,
+      "two_qubit_gates": 1408,
+      "circuits_including_calibration": 12
+    },
+    {
+      "optimization_level": 3,
+      "seed_transpiler": 7,
+      "calibration_exposure": 2.1707374285079335,
+      "total_wave_duration_s": 0.00016547199999999995,
+      "two_qubit_gates": 1384,
+      "circuits_including_calibration": 12
+    },
+    {
+      "optimization_level": 3,
+      "seed_transpiler": 8,
+      "calibration_exposure": 2.18049266632454,
+      "total_wave_duration_s": 0.00016614399999999993,
+      "two_qubit_gates": 1392,
+      "circuits_including_calibration": 12
+    },
+    {
+      "optimization_level": 3,
+      "seed_transpiler": 9,
+      "calibration_exposure": 2.1707374285079335,
+      "total_wave_duration_s": 0.00016547199999999995,
+      "two_qubit_gates": 1384,
+      "circuits_including_calibration": 12
+    }
+  ],
+  "ranking": "Sum -log(1-error), then duration, then two-qubit gate count; heuristic only",
+  "selected": {
+    "optimization_level": 3,
+    "seed_transpiler": 7
+  }
+}

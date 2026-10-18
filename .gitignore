@@ -10,3 +10,6 @@ data/
 *.npy
 *.log
 .env*
+
+# Published experiment evidence is intentionally versioned.
+!results/sources/handoff/3_ibm_job/hw_run.log

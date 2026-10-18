@@ -1,0 +1,44 @@
+[
+  {
+    "index": 0,
+    "pair": 0,
+    "gate_twirling": false,
+    "job_id": "dbaa07k24mrc73853fo0",
+    "calibration_checks_passed": true
+  },
+  {
+    "index": 1,
+    "pair": 0,
+    "gate_twirling": true,
+    "job_id": "dbaa0qpgv2cc73e6ib60",
+    "calibration_checks_passed": true
+  },
+  {
+    "index": 2,
+    "pair": 1,
+    "gate_twirling": true,
+    "job_id": "dbaa121gv2cc73e6ibdg",
+    "calibration_checks_passed": true
+  },
+  {
+    "index": 3,
+    "pair": 1,
+    "gate_twirling": false,
+    "job_id": "dbaa8l0c77vs7382h35g",
+    "calibration_checks_passed": true
+  },
+  {
+    "index": 4,
+    "pair": 2,
+    "gate_twirling": false,
+    "job_id": "dbaadagc77vs7382h9a0",
+    "calibration_checks_passed": true
+  },
+  {
+    "index": 5,
+    "pair": 2,
+    "gate_twirling": true,
+    "job_id": "dbaadh1gv2cc73e6iq8g",
+    "calibration_checks_passed": true
+  }
+]

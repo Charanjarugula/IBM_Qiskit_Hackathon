@@ -1,0 +1,40 @@
+{
+  "written_before_submission_utc": "2026-10-18T10:31:56.479779+00:00",
+  "order": [
+    {
+      "pair": 0,
+      "gate_twirling": false
+    },
+    {
+      "pair": 0,
+      "gate_twirling": true
+    },
+    {
+      "pair": 1,
+      "gate_twirling": true
+    },
+    {
+      "pair": 1,
+      "gate_twirling": false
+    },
+    {
+      "pair": 2,
+      "gate_twirling": false
+    },
+    {
+      "pair": 2,
+      "gate_twirling": true
+    }
+  ],
+  "shots_per_circuit": 4096,
+  "circuits_per_job": 12,
+  "maximum_jobs": 6,
+  "estimated_qpu_seconds": 90.6628608,
+  "execution_seconds_ceiling": 360,
+  "primary_metric": "Paired raw-pressure RMSE difference vs saved noiseless circuit",
+  "secondary_metric": "Readout-corrected RMSE when calibration checks pass",
+  "exclusions": "Exploratory pilots excluded from confirmatory summaries",
+  "stop_rule": "Complete all three pairs irrespective of effect direction. Stop for submission/result failure or rejected calibration.",
+  "uncertainty": "Three paired job repeats; randomizations within jobs are not independent job repeats",
+  "limitations": "Short same-device campaign; residual drift possible; no speedup or clinical claim"
+}

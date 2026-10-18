@@ -1,0 +1,70 @@
+{
+ "query": "energy in every cell after the wave crosses the head (t = n), within 5% of exact",
+ "accuracy_matched_steps": {
+  "4": {
+   "classical_time_steps": 44,
+   "quantum_trotter_steps": 26
+  },
+  "6": {
+   "classical_time_steps": 75,
+   "quantum_trotter_steps": 41
+  },
+  "8": {
+   "classical_time_steps": 141,
+   "quantum_trotter_steps": 100
+  },
+  "10": {
+   "classical_time_steps": 185,
+   "quantum_trotter_steps": 132
+  },
+  "12": {
+   "classical_time_steps": 198,
+   "quantum_trotter_steps": 136
+  }
+ },
+ "step_scaling": {
+  "classical_steps ~ n^": 1.4664279541841159,
+  "quantum_trotter_steps ~ n^": 1.6746807377771242
+ },
+ "classical_cost_per_step ~ voxels^": 0.9622767674225129,
+ "classical_measured_matched_s": {
+  "4": 0.0004265829920768738,
+  "6": 0.0008376250043511391,
+  "8": 0.001830084016546607,
+  "10": 0.003289707994554192,
+  "12": 0.005437707994133234
+ },
+ "quantum_heron_gate_time": {
+  "2": {
+   "qubits": 44,
+   "per_step_s": 2.3432000000000036e-05,
+   "fixed_s": 0.0
+  },
+  "3": {
+   "qubits": 135,
+   "per_step_s": 4.18120000000011e-05,
+   "fixed_s": 3.7199999999902676e-07
+  }
+ },
+ "quantum_3x3x3_matched_s_4000_shots": 2.617306716592108,
+ "shots_per_answer": 4000,
+ "todays_shot_cycle_s": 0.00027568586666666667,
+ "crossover_side_gate_time": 282.96592054849447,
+ "crossover_voxels_gate_time": 22656999.818421792,
+ "crossover_side_todays_cycle": 282.96592054849447,
+ "crossover_voxels_todays_cycle": 22656999.818421792,
+ "full_head_440^3": {
+  "classical_s": 36628.43754119835,
+  "quantum_gate_s": 11105.067553588857,
+  "quantum_todays_cycle_s": 11106.145145055523,
+  "speedup_gate": 3.298353419683704,
+  "speedup_todays_cycle": 3.298033391676445
+ },
+ "assumptions": [
+  "beyond 3x3x3 (135 qubits) this is a projection: unary needs ~4 qubits per voxel (~3.4e8 for the full head)",
+  "per-step gate time held at the measured 3x3x3 value, i.e. hardware whose connectivity matches the grid",
+  "noise-free: today's chips lose most of the signal (raw 0.013 vs exact 0.104 on ibm_marrakesh)",
+  "quantum cost counts one 4,000-shot circuit; reading out many receivers/times needs more circuits (readout wall)",
+  "classical = our numpy finite-difference solver on one laptop core, not an optimised GPU code"
+ ]
+}

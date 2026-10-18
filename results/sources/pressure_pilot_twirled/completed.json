@@ -1,0 +1,11 @@
+{
+  "wall_seconds": 155.20238279132172,
+  "status": "pilot_complete",
+  "job_ids": [
+    "dba648ni0auc7391isg0"
+  ],
+  "gate_twirling": true,
+  "readout_calibration_passed": true,
+  "dynamical_decoupling": false,
+  "error_correction": false
+}

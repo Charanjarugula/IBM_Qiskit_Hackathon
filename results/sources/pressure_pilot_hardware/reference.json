@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "source_sha256": {
+    "classical/_core/grid.py": "d3617dfaae71823f9ce8274f3ba2670954832aecd833adf429f87fcf46b83607",
+    "classical/_core/problem.py": "ff456c38b00c98767114a6264eeb3068066e28f78eeeca6f794c80c10131deb2",
+    "classical/reference.py": "ab35a38be4e287867278797a09ea995b80ac067a6dec840e7c079cba8e83d6df",
+    "simulator/circuits.py": "0e091584392a3e1e2d8321e3f54e7d6b8cb3faf56ef96de141207f1b88eeca76",
+    "simulator/readout.py": "9de374cc544b671b0d5778297536fbc4a1c0dba86fc0a3cfc0651209c64f96d2",
+    "ibm_hardware/readout.py": "b146744292c8adfb6ae5a9a6eb794cd935ff408480861da2d3c547c4c82ae0c5",
+    "simulator/reference.py": "4c5cd41d75443a846a67e695484ab8ffdff735f9e1a3643bcf5f1a1c8f7b09ba"
+  },
+  "acquisition_signature": "e193397a36c242fb61516d53efa74e0ff094b472560148683254d485b86fffe8",
+  "parameters": [
+    1.0,
+    1.1
+  ],
+  "base_speed_ratio": [
+    1.0,
+    1.0
+  ],
+  "region_ids": [
+    0,
+    1
+  ],
+  "trotter_step_s": 1e-06,
+  "data_qubits": 3,
+  "wave_circuits": 8,
+  "trace_shape": [
+    2,
+    2,
+    2
+  ],
+  "ideal_pressure_pa": [
+    [
+      [
+        0.9121717052080304,
+        0.052517579427533156
+      ],
+      [
+        0.668673631237694,
+        0.18970332992917194
+      ]
+    ],
+    [
+      [
+        0.043402958204572975,
+        0.8939296086333666
+      ],
+      [
+        0.15677961151171255,
+        0.6027806977331345
+      ]
+    ]
+  ],
+  "classical_pressure_pa": [
+    [
+      [
+        0.9117424920619681,
+        0.05266436334742516
+      ],
+      [
+        0.6671330993103224,
+        0.19013992215296738
+      ]
+    ],
+    [
+      [
+        0.04352426722927698,
+        0.893462299825672
+      ],
+      [
+        0.15714043153137797,
+        0.6011341180671437
+      ]
+    ]
+  ],
+  "operator_max_abs_error": 2.88660121438923e-14,
+  "relative_trotter_error": 0.0015284820737686132,
+  "control_verification": "Analytic controlled Pauli blocks, signed readout probes, source states; full generic unitary also checked for <=3 data qubits",
+  "classical_forward_seconds": 0.002830209006788209,
+  "relative_trotter_error_half_step": 0.00037880137240530024,
+  "verified": true,
+  "readout_verified": true,
+  "scope": "Noiseless circuit versus exact reduced discrete wave model; no hardware execution"
+}

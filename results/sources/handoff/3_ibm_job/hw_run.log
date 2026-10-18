@@ -1,0 +1,14 @@
+6 circuits x 4000 shots ≈ 10 s QPU
+qiskit_runtime_service._discover_account:WARNING:2026-10-17 15:23:28,436: Loading account with the given token. A saved account will not be used.
+qiskit_runtime_service.__init__:WARNING:2026-10-17 15:23:31,085: Instance was not set at service instantiation. Free and trial plan instances will be prioritized. Based on the following filters: (tags: None, region: us-east, eu-de), and available plans: (open), the available account instances are: open-instance. If you need a specific instance set it explicitly either by using a saved account with a saved default instance or passing it in directly to QiskitRuntimeService(). Alternatively, pass instance='auto' or save it to your account for auto-selection without warning.
+qiskit_runtime_service.backends:WARNING:2026-10-17 15:23:31,378: Loading instance: open-instance, plan: open
+qiskit_runtime_service.backends:WARNING:2026-10-17 15:23:32,791: Using instance: open-instance, plan: open
+job id: db9smd9gv2cc73e60pm0
+{'bleed': False, 'steps': 2, 'fold': 1, 'raw': 0.01875, 'raw_se': 0.002144669992096686, 'postselected': 0.055025678650036686, 'post_se': 0.0061765331897769655, 'kept_fraction': 0.34075, 'shots': 4000}
+{'bleed': False, 'steps': 4, 'fold': 1, 'raw': 0.01725, 'raw_se': 0.0020586668926759373, 'postselected': 0.07683741648106904, 'post_se': 0.008887657410268366, 'kept_fraction': 0.2245, 'shots': 4000}
+{'bleed': False, 'steps': 6, 'fold': 1, 'raw': 0.01625, 'raw_se': 0.0019991209005460375, 'postselected': 0.08990318118948824, 'post_se': 0.010638053722400972, 'kept_fraction': 0.18075, 'shots': 4000}
+{'bleed': False, 'steps': 8, 'fold': 1, 'raw': 0.01325, 'raw_se': 0.0018079295824229436, 'postselected': 0.08128834355828221, 'post_se': 0.010702369782286487, 'kept_fraction': 0.163, 'shots': 4000}
+{'bleed': False, 'steps': 8, 'fold': 3, 'raw': 0.00125, 'raw_se': 0.0005586674995021637, 'postselected': 0.08333333333333333, 'post_se': 0.03568120160740314, 'kept_fraction': 0.015, 'shots': 4000}
+{'bleed': True, 'steps': 8, 'fold': 1, 'raw': 0.01325, 'raw_se': 0.0018079295824229436, 'postselected': 0.09122203098106713, 'post_se': 0.011945124963936363, 'kept_fraction': 0.14525, 'shots': 4000}
+saved /Users/aniksahai/Desktop/IBM Quantum Hackathon/code/team-quantum-ultrasound/results/03_hardware_results.json
+exit 0

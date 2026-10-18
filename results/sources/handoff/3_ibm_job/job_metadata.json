@@ -1,0 +1,54 @@
+{
+ "job_id": "db9smd9gv2cc73e60pm0",
+ "backend": "ibm_marrakesh",
+ "status": "DONE",
+ "creation_date": "2026-10-17 15:23:33.769008-04:00",
+ "session_id": "2ebbb18b-fc27-42f2-a3cd-6e444b9bf766",
+ "tags": null,
+ "usage_estimation": {
+  "quantum_seconds": 12.203493467
+ },
+ "usage_seconds": 9,
+ "metrics": {
+  "caller": "qiskit_ibm_runtime~sampler.py",
+  "qiskit_version": "qiskit_ibm_runtime-0.50.0,qiskit-2.6.0*,qiskit_aer-0.17.2",
+  "timestamps": {
+   "created": "2026-10-17T19:23:33.769008Z",
+   "finished": "2026-10-17T19:23:53.763809Z",
+   "running": "2026-10-17T19:23:35.09851Z"
+  },
+  "usage": {
+   "qpu_charge_time_seconds": 9,
+   "value": 0.145011,
+   "unit": "resource_units",
+   "status": "complete",
+   "details": [
+    {
+     "value": 0.145011,
+     "unit": "resource_units",
+     "metric": {
+      "id": "caffe3ca-729c-5750-8777-df63bbf8bfd9",
+      "value": 9
+     }
+    }
+   ]
+  },
+  "circuits_execution_time_ns": 6616460800
+ },
+ "inputs_options": {
+  "twirling": {
+   "enable_gates": true,
+   "enable_measure": true
+  },
+  "default_shots": 4000,
+  "dynamical_decoupling": {
+   "enable": true
+  }
+ },
+ "result_metadata": {
+  "execution": {
+   "execution_spans": "ExecutionSpans([TwirledSliceSpanV2(<start='2026-10-17 19:23:41', stop='2026-10-17 19:23:52', size=24000>)])"
+  },
+  "version": 2
+ }
+}

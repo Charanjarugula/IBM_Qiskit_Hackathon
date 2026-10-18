@@ -1,0 +1,17 @@
+{
+  "wall_seconds": 139.29890058282763,
+  "forward_calls": 1,
+  "reserved_circuits": 12,
+  "reserved_shots": 12288,
+  "reserved_jobs": 1,
+  "job_ids": [
+    "dba61tpgv2cc73e6dpsg"
+  ],
+  "error_mitigation": true,
+  "error_correction": false,
+  "dynamical_decoupling": false,
+  "twirling": false,
+  "uncertainty": "See pilot_pressure.json; shared calibration covariance included",
+  "mitigation_method": "single_qubit_assignment_calibration",
+  "status": "pilot_complete"
+}
