@@ -34,10 +34,10 @@ def error_estimate(counts, state, shots):
     return estimate, smoothed*(1-smoothed)/shots
 
 
-def analyze_pilot(records, counts, shots, trace_shape):
+def analyze_pilot(records, counts, shots, trace_shape, mitigate=True):
     if len(records) != len(counts):
         raise ValueError('Records and results differ in length')
-    qubits = sorted({r['readout_qubit'] for r in records if r['kind'] == 'wave'})
+    qubits = sorted({r['readout_qubit'] for r in records if r['kind'] == 'wave'}) if mitigate else []
     calibration = {}
     for record, raw in zip(records, counts):
         ancilla_statistics(raw, shots)

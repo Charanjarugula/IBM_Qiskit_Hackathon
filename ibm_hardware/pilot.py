@@ -10,6 +10,17 @@ from .compilation import select_compilation
 from .readout import calibration_circuits, analyze_pilot
 
 
+def estimate_job_seconds(circuits, backend, shots):
+    rep_delay = float(backend.default_rep_delay)
+    used = {circuit.find_bit(q).index for circuit in circuits
+            for instruction in circuit.data for q in instruction.qubits}
+    reset_time = max(float(backend.target['reset'][(q,)].duration) for q in used)
+    durations = [float(circuit.estimate_duration(backend.target, unit='s')) for circuit in circuits]
+    if not np.isfinite([rep_delay, reset_time, *durations]).all() or min(rep_delay, reset_time, *durations) < 0:
+        raise ValueError('Missing or invalid backend timing information')
+    return 2+shots*sum(duration+rep_delay+reset_time for duration in durations)
+
+
 def prepare_pilot(problem, parameters, backend, evidence, limits, seed, initial_layout):
     logical, wave, records = select_compilation(
         problem, parameters, backend, limits, seed, initial_layout, evidence)
@@ -23,14 +34,7 @@ def prepare_pilot(problem, parameters, backend, evidence, limits, seed, initial_
     limits.check_totals(len(circuits), 1)
     if len(circuits) > limits.circuits_per_job:
         raise ValueError('Pilot including calibrations must fit in one job')
-    rep_delay = float(backend.default_rep_delay)
-    used = {circuit.find_bit(q).index for circuit in circuits
-            for instruction in circuit.data for q in instruction.qubits}
-    reset_time = max(float(backend.target['reset'][(q,)].duration) for q in used)
-    durations = [float(circuit.estimate_duration(backend.target, unit='s')) for circuit in circuits]
-    if not np.isfinite([rep_delay, reset_time, *durations]).all() or min(rep_delay, reset_time, *durations) < 0:
-        raise ValueError('Missing or invalid backend timing information')
-    estimate = 2+limits.shots*sum(duration+rep_delay+reset_time for duration in durations)
+    estimate = estimate_job_seconds(circuits, backend, limits.shots)
     if estimate > min(limits.max_execution_seconds_per_job, limits.max_total_execution_seconds):
         raise ValueError('Estimated pilot time exceeds the execution ceiling; no jobs submitted')
     logical_hash = save_circuits(evidence, 'pilot_logical.qpy', logical)

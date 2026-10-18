@@ -18,7 +18,7 @@ def rotation_gate_bound(terms, steps):
 
 
 def compile_call(problem, parameters, backend, limits, seed, initial_layout=None,
-                 optimization_level=1):
+                 optimization_level=1, direct_control=True):
     n, terms = pauli_terms(problem.hamiltonian(parameters), limits.max_data_qubits)
     if n+1 > backend.num_qubits:
         raise ValueError('Backend lacks data register plus readout ancilla')
@@ -36,9 +36,9 @@ def compile_call(problem, parameters, backend, limits, seed, initial_layout=None
                 steps = max(1, ceil(duration/problem.config['trotter_step_s']))
                 if rotation_gate_bound(terms, steps) > limits.max_logical_gates:
                     raise ValueError('Logical evolution exceeds construction budget')
-                evo = evolution(n, terms, duration, problem.config['trotter_step_s'], controlled=True)
+                evo = evolution(n, terms, duration, problem.config['trotter_step_s'], controlled=direct_control)
                 for ri, receiver in enumerate(problem.receivers):
-                    qc = pressure_interferometer(evo, int(source), int(receiver), controlled=True)
+                    qc = pressure_interferometer(evo, int(source), int(receiver), controlled=direct_control)
                     isa = pm.run(qc)
                     # Only the final ancilla measurement is allowed, with no postselection.
                     if isa.num_clbits != 1 or len(isa.cregs) != 1 or isa.cregs[0].size != 1:
@@ -79,6 +79,7 @@ def compile_call(problem, parameters, backend, limits, seed, initial_layout=None
                         'classical_register': isa.cregs[0].name, 'logical_to_physical': layout,
                         'readout_qubit': layout[0], 'optimization_level': optimization_level,
                         'seed_transpiler': seed,
+                        'variant': 'optimized' if direct_control else 'original',
                         'used_physical_qubits': sorted(used), 'depth': isa.depth(),
                         'two_qubit_gates': two_qubit, 'gates': isa.size(),
                         'operations': dict(isa.count_ops())})
@@ -104,7 +105,8 @@ def calibration_cost(circuit, backend):
     return exposure, duration
 
 
-def select_compilation(problem, parameters, backend, limits, seed, initial_layout, evidence):
+def select_compilation(problem, parameters, backend, limits, seed, initial_layout, evidence,
+                       extra_wave_circuits=0, repetitions=1):
     """Compare five exact compilations locally; no primitives or hardware jobs."""
     best, best_key, candidates = None, None, []
     for level, candidate_seed in ((1, seed), (2, seed), (3, seed), (3, seed+1), (3, seed+2)):
@@ -116,8 +118,8 @@ def select_compilation(problem, parameters, backend, limits, seed, initial_layou
                 raise ValueError('Pilot needs at least one nonzero source contribution')
             costs = [calibration_cost(circuit, backend) for circuit in circuits]
             readout_qubits = {record['readout_qubit'] for record in records}
-            total = len(circuits)+4*len(readout_qubits)
-            limits.check_totals(total, 1)
+            total = len(circuits)+extra_wave_circuits+4*len(readout_qubits)
+            limits.check_totals(total*repetitions, repetitions)
             if total > limits.circuits_per_job:
                 raise ValueError('Pilot plus repeated calibrations must fit in one job')
             key = (sum(cost[0] for cost in costs), sum(cost[1] for cost in costs),
