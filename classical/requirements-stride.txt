@@ -1,0 +1,3 @@
+# Separate environment for Stride/Devito.
+stride @ git+https://github.com/trustimaging/stride.git@8733ecb9401e3889eb3e071fc766e26bc734da21
+devito==4.8.23
