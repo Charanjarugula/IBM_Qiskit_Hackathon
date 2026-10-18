@@ -66,7 +66,10 @@ def compile_call(problem, parameters, backend, limits, seed, initial_layout=None
                         raise ValueError('Ancilla measurement moved to an unexpected output bit')
                     if (isa.size() > limits.max_compiled_gates or isa.depth() > limits.max_depth
                             or two_qubit > limits.max_two_qubit_gates):
-                        raise ValueError('Compiled circuit exceeds hardware depth/gate ceilings')
+                        raise ValueError(
+                            f'Compiled circuit exceeds hardware ceilings: gates={isa.size()}'
+                            f'/{limits.max_compiled_gates}, depth={isa.depth()}/{limits.max_depth}, '
+                            f'two_qubit={two_qubit}/{limits.max_two_qubit_gates}')
                     logical.append(qc)
                     compiled.append(isa)
                     records.append({

@@ -3,8 +3,9 @@
 Use python -m ibm_hardware.run from the repository root. Preparation requires
 --execute; forward/invert also require --submit-hardware. Use the same reduced
 classical/configs/*.json and observations as the classical and simulator runs.
-For the first experiment use --mode pilot with classical/configs/small_1d.json.
+For the first experiment use --mode pilot with ibm_hardware/pilot_1d.json.
 Both pilot and experiment require --reference <simulator.reference output>.
+While that verification is pending, ibm_hardware.preflight can compile but cannot submit.
 Without --submit-hardware it only prepares the pilot and records its resource plan.
 Use --mode experiment for the three-repeat
 comparison. This also only prepares unless --submit-hardware is supplied.
