@@ -1,0 +1,163 @@
+{
+  "method": "Exact statevectors after dropping only idle physical wires; at most four active qubits",
+  "circuits_checked": 12,
+  "all_match": true,
+  "rows": [
+    {
+      "kind": "calibration",
+      "prepared_state": 0,
+      "ideal_z": 1.0
+    },
+    {
+      "kind": "calibration",
+      "prepared_state": 1,
+      "ideal_z": -1.0
+    },
+    {
+      "kind": "wave",
+      "index": [
+        0,
+        0,
+        0
+      ],
+      "active_physical_qubits": [
+        81,
+        82,
+        83,
+        96
+      ],
+      "compiled_ideal_pressure": 0.9121717052080373,
+      "reference_pressure": 0.9121717052080304,
+      "absolute_error": 6.8833827526759706e-15
+    },
+    {
+      "kind": "wave",
+      "index": [
+        1,
+        1,
+        0
+      ],
+      "active_physical_qubits": [
+        81,
+        82,
+        83,
+        96
+      ],
+      "compiled_ideal_pressure": 0.1567796115117191,
+      "reference_pressure": 0.15677961151171255,
+      "absolute_error": 6.5503158452884236e-15
+    },
+    {
+      "kind": "wave",
+      "index": [
+        1,
+        1,
+        1
+      ],
+      "active_physical_qubits": [
+        81,
+        82,
+        83,
+        96
+      ],
+      "compiled_ideal_pressure": 0.6027806977331482,
+      "reference_pressure": 0.6027806977331345,
+      "absolute_error": 1.3766765505351941e-14
+    },
+    {
+      "kind": "wave",
+      "index": [
+        0,
+        1,
+        0
+      ],
+      "active_physical_qubits": [
+        81,
+        82,
+        83,
+        96
+      ],
+      "compiled_ideal_pressure": 0.6686736312377042,
+      "reference_pressure": 0.668673631237694,
+      "absolute_error": 1.021405182655144e-14
+    },
+    {
+      "kind": "wave",
+      "index": [
+        1,
+        0,
+        0
+      ],
+      "active_physical_qubits": [
+        81,
+        82,
+        83,
+        96
+      ],
+      "compiled_ideal_pressure": 0.04340295820457476,
+      "reference_pressure": 0.043402958204572975,
+      "absolute_error": 1.7832957333041577e-15
+    },
+    {
+      "kind": "wave",
+      "index": [
+        1,
+        0,
+        1
+      ],
+      "active_physical_qubits": [
+        81,
+        82,
+        83,
+        96
+      ],
+      "compiled_ideal_pressure": 0.893929608633374,
+      "reference_pressure": 0.8939296086333666,
+      "absolute_error": 7.438494264988549e-15
+    },
+    {
+      "kind": "wave",
+      "index": [
+        0,
+        0,
+        1
+      ],
+      "active_physical_qubits": [
+        81,
+        82,
+        83,
+        96
+      ],
+      "compiled_ideal_pressure": 0.05251757942753414,
+      "reference_pressure": 0.052517579427533156,
+      "absolute_error": 9.853229343548264e-16
+    },
+    {
+      "kind": "wave",
+      "index": [
+        0,
+        1,
+        1
+      ],
+      "active_physical_qubits": [
+        81,
+        82,
+        83,
+        96
+      ],
+      "compiled_ideal_pressure": 0.18970332992917582,
+      "reference_pressure": 0.18970332992917194,
+      "absolute_error": 3.885780586188048e-15
+    },
+    {
+      "kind": "calibration",
+      "prepared_state": 0,
+      "ideal_z": 1.0
+    },
+    {
+      "kind": "calibration",
+      "prepared_state": 1,
+      "ideal_z": -1.0
+    }
+  ]
+}

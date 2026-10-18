@@ -1,0 +1,437 @@
+{
+  "tag": "pressure-twirl-00933726afa84f94a5275dc731ab62fc",
+  "backend": "ibm_kingston",
+  "records": [
+    {
+      "kind": "calibration",
+      "readout_qubit": 82,
+      "prepared_state": 0,
+      "repeat": 0,
+      "classical_register": "c"
+    },
+    {
+      "kind": "calibration",
+      "readout_qubit": 82,
+      "prepared_state": 1,
+      "repeat": 0,
+      "classical_register": "c"
+    },
+    {
+      "source_index": 0,
+      "time_index": 0,
+      "receiver_index": 0,
+      "source": 0,
+      "receiver": 0,
+      "time_s": 1e-06,
+      "evolution_time_s": 1e-06,
+      "physical_scale_pa": 1.0,
+      "parameters": [
+        1.0,
+        1.1
+      ],
+      "data_qubits": 3,
+      "readout_ancillas": 1,
+      "pauli_terms": 12,
+      "trotter_steps": 1,
+      "classical_register": "c",
+      "logical_to_physical": [
+        82,
+        96,
+        83,
+        81
+      ],
+      "readout_qubit": 82,
+      "optimization_level": 3,
+      "seed_transpiler": 7,
+      "variant": "optimized",
+      "used_physical_qubits": [
+        81,
+        82,
+        83,
+        96
+      ],
+      "depth": 385,
+      "two_qubit_gates": 116,
+      "gates": 482,
+      "operations": {
+        "sx": 197,
+        "rz": 151,
+        "cz": 116,
+        "x": 17,
+        "measure": 1
+      },
+      "calibration_exposure": 0.18435427567916737,
+      "estimated_duration_s": 1.4560000000000033e-05,
+      "kind": "wave"
+    },
+    {
+      "source_index": 1,
+      "time_index": 1,
+      "receiver_index": 0,
+      "source": 1,
+      "receiver": 0,
+      "time_s": 2e-06,
+      "evolution_time_s": 2e-06,
+      "physical_scale_pa": 0.909090909090909,
+      "parameters": [
+        1.0,
+        1.1
+      ],
+      "data_qubits": 3,
+      "readout_ancillas": 1,
+      "pauli_terms": 12,
+      "trotter_steps": 2,
+      "classical_register": "c",
+      "logical_to_physical": [
+        82,
+        96,
+        83,
+        81
+      ],
+      "readout_qubit": 82,
+      "optimization_level": 3,
+      "seed_transpiler": 7,
+      "variant": "optimized",
+      "used_physical_qubits": [
+        81,
+        82,
+        83,
+        96
+      ],
+      "depth": 765,
+      "two_qubit_gates": 230,
+      "gates": 959,
+      "operations": {
+        "sx": 394,
+        "rz": 299,
+        "cz": 230,
+        "x": 35,
+        "measure": 1
+      },
+      "calibration_exposure": 0.35828654057487214,
+      "estimated_duration_s": 2.680799999999995e-05,
+      "kind": "wave"
+    },
+    {
+      "source_index": 1,
+      "time_index": 1,
+      "receiver_index": 1,
+      "source": 1,
+      "receiver": 1,
+      "time_s": 2e-06,
+      "evolution_time_s": 2e-06,
+      "physical_scale_pa": 1.0,
+      "parameters": [
+        1.0,
+        1.1
+      ],
+      "data_qubits": 3,
+      "readout_ancillas": 1,
+      "pauli_terms": 12,
+      "trotter_steps": 2,
+      "classical_register": "c",
+      "logical_to_physical": [
+        82,
+        96,
+        83,
+        81
+      ],
+      "readout_qubit": 82,
+      "optimization_level": 3,
+      "seed_transpiler": 7,
+      "variant": "optimized",
+      "used_physical_qubits": [
+        81,
+        82,
+        83,
+        96
+      ],
+      "depth": 756,
+      "two_qubit_gates": 228,
+      "gates": 950,
+      "operations": {
+        "sx": 388,
+        "rz": 297,
+        "cz": 228,
+        "x": 36,
+        "measure": 1
+      },
+      "calibration_exposure": 0.3547271139372294,
+      "estimated_duration_s": 2.6575999999999954e-05,
+      "kind": "wave"
+    },
+    {
+      "source_index": 0,
+      "time_index": 1,
+      "receiver_index": 0,
+      "source": 0,
+      "receiver": 0,
+      "time_s": 2e-06,
+      "evolution_time_s": 2e-06,
+      "physical_scale_pa": 1.0,
+      "parameters": [
+        1.0,
+        1.1
+      ],
+      "data_qubits": 3,
+      "readout_ancillas": 1,
+      "pauli_terms": 12,
+      "trotter_steps": 2,
+      "classical_register": "c",
+      "logical_to_physical": [
+        82,
+        96,
+        83,
+        81
+      ],
+      "readout_qubit": 82,
+      "optimization_level": 3,
+      "seed_transpiler": 7,
+      "variant": "optimized",
+      "used_physical_qubits": [
+        81,
+        82,
+        83,
+        96
+      ],
+      "depth": 756,
+      "two_qubit_gates": 228,
+      "gates": 945,
+      "operations": {
+        "sx": 388,
+        "rz": 293,
+        "cz": 228,
+        "x": 35,
+        "measure": 1
+      },
+      "calibration_exposure": 0.3546400321913416,
+      "estimated_duration_s": 2.6575999999999954e-05,
+      "kind": "wave"
+    },
+    {
+      "source_index": 1,
+      "time_index": 0,
+      "receiver_index": 0,
+      "source": 1,
+      "receiver": 0,
+      "time_s": 1e-06,
+      "evolution_time_s": 1e-06,
+      "physical_scale_pa": 0.909090909090909,
+      "parameters": [
+        1.0,
+        1.1
+      ],
+      "data_qubits": 3,
+      "readout_ancillas": 1,
+      "pauli_terms": 12,
+      "trotter_steps": 1,
+      "classical_register": "c",
+      "logical_to_physical": [
+        82,
+        96,
+        83,
+        81
+      ],
+      "readout_qubit": 82,
+      "optimization_level": 3,
+      "seed_transpiler": 7,
+      "variant": "optimized",
+      "used_physical_qubits": [
+        81,
+        82,
+        83,
+        96
+      ],
+      "depth": 394,
+      "two_qubit_gates": 118,
+      "gates": 496,
+      "operations": {
+        "sx": 203,
+        "rz": 157,
+        "cz": 118,
+        "x": 17,
+        "measure": 1
+      },
+      "calibration_exposure": 0.18800078406269793,
+      "estimated_duration_s": 1.4792000000000036e-05,
+      "kind": "wave"
+    },
+    {
+      "source_index": 1,
+      "time_index": 0,
+      "receiver_index": 1,
+      "source": 1,
+      "receiver": 1,
+      "time_s": 1e-06,
+      "evolution_time_s": 1e-06,
+      "physical_scale_pa": 1.0,
+      "parameters": [
+        1.0,
+        1.1
+      ],
+      "data_qubits": 3,
+      "readout_ancillas": 1,
+      "pauli_terms": 12,
+      "trotter_steps": 1,
+      "classical_register": "c",
+      "logical_to_physical": [
+        82,
+        96,
+        83,
+        81
+      ],
+      "readout_qubit": 82,
+      "optimization_level": 3,
+      "seed_transpiler": 7,
+      "variant": "optimized",
+      "used_physical_qubits": [
+        81,
+        82,
+        83,
+        96
+      ],
+      "depth": 385,
+      "two_qubit_gates": 116,
+      "gates": 485,
+      "operations": {
+        "sx": 197,
+        "rz": 153,
+        "cz": 116,
+        "x": 18,
+        "measure": 1
+      },
+      "calibration_exposure": 0.18444135742505516,
+      "estimated_duration_s": 1.4560000000000033e-05,
+      "kind": "wave"
+    },
+    {
+      "source_index": 0,
+      "time_index": 0,
+      "receiver_index": 1,
+      "source": 0,
+      "receiver": 1,
+      "time_s": 1e-06,
+      "evolution_time_s": 1e-06,
+      "physical_scale_pa": 1.1,
+      "parameters": [
+        1.0,
+        1.1
+      ],
+      "data_qubits": 3,
+      "readout_ancillas": 1,
+      "pauli_terms": 12,
+      "trotter_steps": 1,
+      "classical_register": "c",
+      "logical_to_physical": [
+        82,
+        96,
+        83,
+        81
+      ],
+      "readout_qubit": 82,
+      "optimization_level": 3,
+      "seed_transpiler": 7,
+      "variant": "optimized",
+      "used_physical_qubits": [
+        81,
+        82,
+        83,
+        96
+      ],
+      "depth": 394,
+      "two_qubit_gates": 118,
+      "gates": 496,
+      "operations": {
+        "sx": 203,
+        "rz": 157,
+        "cz": 118,
+        "x": 17,
+        "measure": 1
+      },
+      "calibration_exposure": 0.18800078406269793,
+      "estimated_duration_s": 1.4792000000000036e-05,
+      "kind": "wave"
+    },
+    {
+      "source_index": 0,
+      "time_index": 1,
+      "receiver_index": 1,
+      "source": 0,
+      "receiver": 1,
+      "time_s": 2e-06,
+      "evolution_time_s": 2e-06,
+      "physical_scale_pa": 1.1,
+      "parameters": [
+        1.0,
+        1.1
+      ],
+      "data_qubits": 3,
+      "readout_ancillas": 1,
+      "pauli_terms": 12,
+      "trotter_steps": 2,
+      "classical_register": "c",
+      "logical_to_physical": [
+        82,
+        96,
+        83,
+        81
+      ],
+      "readout_qubit": 82,
+      "optimization_level": 3,
+      "seed_transpiler": 7,
+      "variant": "optimized",
+      "used_physical_qubits": [
+        81,
+        82,
+        83,
+        96
+      ],
+      "depth": 765,
+      "two_qubit_gates": 230,
+      "gates": 959,
+      "operations": {
+        "sx": 394,
+        "rz": 299,
+        "cz": 230,
+        "x": 35,
+        "measure": 1
+      },
+      "calibration_exposure": 0.35828654057487214,
+      "estimated_duration_s": 2.680799999999995e-05,
+      "kind": "wave"
+    },
+    {
+      "kind": "calibration",
+      "readout_qubit": 82,
+      "prepared_state": 0,
+      "repeat": 1,
+      "classical_register": "c"
+    },
+    {
+      "kind": "calibration",
+      "readout_qubit": 82,
+      "prepared_state": 1,
+      "repeat": 1,
+      "classical_register": "c"
+    }
+  ],
+  "shots": 1024,
+  "options": {
+    "default_shots": 1024,
+    "max_execution_time": 60,
+    "dynamical_decoupling": {
+      "enable": false
+    },
+    "twirling": {
+      "enable_gates": true,
+      "enable_measure": false,
+      "num_randomizations": 32,
+      "shots_per_randomization": 32
+    },
+    "execution": {
+      "init_qubits": true,
+      "meas_type": "classified"
+    }
+  },
+  "recovery": "Check IBM for this tag before any retry"
+}

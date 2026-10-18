@@ -1,0 +1,15 @@
+{
+  "experiment_code_base": "39e3956",
+  "partner_repository": "https://github.com/AnikS22/IBM_Qiskit_Fallfest",
+  "partner_commit": "a42140befaddeb18fd6296c829a39e045e6fd573",
+  "simulator_archives": "Exact bytes from partner project/handoff; identical to previously audited local handoff.",
+  "simulator_reconstructions_base_commit": "121bb3a; archived source snapshots include the execution patch",
+  "ibm_wave_energy": "Partner project/handoff/3_ibm_job: original 15-qubit Marrakesh counts and metadata.",
+  "ibm_signed_pressure": "Locally collected IBM Runtime results, source snapshots and saved ISA circuits; two exploratory pilots plus six paired jobs.",
+  "speed": "Partner results/07_crossover.{json,png} and scaling/crossover.py, preserved as supplied. Projections are not validated speedup measurements.",
+  "public_copy_changes": [
+    "Account-wide usage_before/after.json omitted; job-level usage retained.",
+    "Private account/instance selectors removed from pressure_pilot_hardware/execution_options.json; other experimental settings retained."
+  ],
+  "scope": "All published result figures are reduced synthetic experiments; no completed clinical/paper-scale inversion benchmark or quantum speedup."
+}

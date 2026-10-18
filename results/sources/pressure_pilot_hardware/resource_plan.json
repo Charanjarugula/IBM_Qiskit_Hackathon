@@ -1,0 +1,14 @@
+{
+  "mode": "pilot",
+  "forward_calls": 1,
+  "wave_circuits": 8,
+  "calibration_circuits": 4,
+  "circuits": 12,
+  "shots": 12288,
+  "shots_per_circuit": 1024,
+  "jobs": 1,
+  "estimated_qpu_seconds": 5.2776192,
+  "execution_seconds_ceiling": 60,
+  "timing_note": "Local estimate; backend overhead may differ. Runtime limit is enforced.",
+  "comparison": "Raw and corrected pressure use the same wave counts; no reference fitted"
+}

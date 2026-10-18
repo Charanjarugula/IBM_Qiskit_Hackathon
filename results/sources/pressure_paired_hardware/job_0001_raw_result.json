@@ -1,0 +1,586 @@
+{
+  "__type__": "PrimitiveResult",
+  "__value__": {
+    "pub_results": [
+      {
+        "__type__": "SamplerPubResult",
+        "__value__": {
+          "data": {
+            "__type__": "DataBin",
+            "__value__": {
+              "field_names": [
+                "c"
+              ],
+              "shape": [],
+              "fields": {
+                "c": {
+                  "__type__": "BitArray",
+                  "__value__": {
+                    "array": {
+                      "__type__": "ndarray",
+                      "__value__": "eJyb7BfqGxDJyFDGUK2eklqcXKRupaBeU2qorqOgnpZfVFKUmBefX5SSChJ3S8wpTgWKF2ckFqQC+RomBpZmOgqGmjoKtQrkAS6GUTAKRgFRgHGgHTAKRsEwBoxI5CgYBaNgFIwCuoChVOjSxa1DKUBGwSggFwAAOKIb/Q=="
+                    },
+                    "num_bits": 1
+                  }
+                }
+              }
+            }
+          },
+          "metadata": {
+            "circuit_metadata": {},
+            "num_randomizations": 32,
+            "compilation": {
+              "scheduler_timing": null,
+              "stretch_values": null
+            }
+          }
+        }
+      },
+      {
+        "__type__": "SamplerPubResult",
+        "__value__": {
+          "data": {
+            "__type__": "DataBin",
+            "__value__": {
+              "field_names": [
+                "c"
+              ],
+              "shape": [],
+              "fields": {
+                "c": {
+                  "__type__": "BitArray",
+                  "__value__": {
+                    "array": {
+                      "__type__": "ndarray",
+                      "__value__": "eJy9Vr1OwzAQvqw8hTeDlIFKCAkegA3EwsCEIhrEgChKoEvhKXhhgoAmzv27LrekPp+/u97/59XN5fVtBWvYxGXb33fxPMT3t0WsQ3xYda9d83y36pbtN/+ieerbgd8/Ni/tcD48OT47rcPiqA4fIY8OqoGg0mgqAbq4AUVmMpcwfgGzKSQGQNQ6E8Ki2Q6wmMKBO5TuYB/MvuQtuDRkWIOeCBGmpW1KNalpqvv/BmwdZXrr8+r46n9Iq5wsO1T/K6KmWoGEgU8alZIx0ejmXEhIYHgFwj0QciXzTMDaczqz8MSFzMI/yaziOhlrApfnxtanoIvP8EglR5MrRLu1BaHX/LlEd7BigtvC1JMo1r5AOcMiSsqzuwh5oUE4OQHgx9dKe+NVJU2N7wNlNl0z4QozZIQR1dbTNJS902Tv8TvcXBzEhX2544ai8sRDBnl1bUHVNksnWYfa/re1J6sXli/BlNLJBkR883WYZkjeAp+2OKtGXUibBr/8Lz92Kzc="
+                    },
+                    "num_bits": 1
+                  }
+                }
+              }
+            }
+          },
+          "metadata": {
+            "circuit_metadata": {},
+            "num_randomizations": 32,
+            "compilation": {
+              "scheduler_timing": null,
+              "stretch_values": null
+            }
+          }
+        }
+      },
+      {
+        "__type__": "SamplerPubResult",
+        "__value__": {
+          "data": {
+            "__type__": "DataBin",
+            "__value__": {
+              "field_names": [
+                "c"
+              ],
+              "shape": [],
+              "fields": {
+                "c": {
+                  "__type__": "BitArray",
+                  "__value__": {
+                    "array": {
+                      "__type__": "ndarray",
+                      "__value__": "eJydV8tOG0EQnLrmK/a2QfIBJISUfAA3olw45BRZwYgDgshOcgl8BT+MHXu6u/oxtrLC3tmZftR0V42Xty+3N1+/of1pf+e71ebHev48zS+/L+bFNN8/r3+tl0/fn9d3q9389fJxs9rObx6WP1fb54+X55+uFtPF2WJ6nf7v+tDQ/l3o99ZntnfocG/Sn/d2oEczzwNQgoMxmi72nGphh+FCj0CWYAu2BgeE2+cB4Cipx+TTQr5h0ZlJWTsYuPLG5DZkWRvvJlURbxmGDFnpXG7ozfQPqRu30RBKB+Zj928Amxt2F7cuIVx1VXyI1SYiBioqflWKENynhKdW0lkPhhOT31AVCctMGY9KyADYd0JlRf017LWI0ACiRwCm5bIZM5pDzbpNSclyQ5V+wrPnpWZEXI88KGCETnvd2vhZDPWnnHETcFACxFQkKb2HVeMw8Gsn0AsiloLD+TnS45tVszMjQ7WOBBw9ywa41SKAIFqYT4DNP2wZuyzIMbFLrZip/DgRutV9yZsQNppETWBHLqe0q5DYMg2VZbtRyCbTKLOMMCLWMJFG0/eBWiMYbxqJDcf0vTyBudWirSLtXsgbaV10NZaU+dL/0HzaooUxItSnUTX86ZaYuOgdYTwX/K76OjKjLIN/KfEvsVUaDya45WEG3T7l9821zx1aVVzvNjDUj3YOIqmo0aQgsiB+SXpiSKbW0WZ408OSuucjaQzWI669Rgzdxx9DhHVgteTIskIRbTOxg8KGFo7PtKAOAwKQEqSIyis/1GgKydAD4OJSMQNgVzqYahXylewwIzKKLvCgcuA8J8KKrkeZ7f89hySxvHoHmOseTA=="
+                    },
+                    "num_bits": 1
+                  }
+                }
+              }
+            }
+          },
+          "metadata": {
+            "circuit_metadata": {},
+            "num_randomizations": 32,
+            "compilation": {
+              "scheduler_timing": null,
+              "stretch_values": null
+            }
+          }
+        }
+      },
+      {
+        "__type__": "SamplerPubResult",
+        "__value__": {
+          "data": {
+            "__type__": "DataBin",
+            "__value__": {
+              "field_names": [
+                "c"
+              ],
+              "shape": [],
+              "fields": {
+                "c": {
+                  "__type__": "BitArray",
+                  "__value__": {
+                    "array": {
+                      "__type__": "ndarray",
+                      "__value__": "eJydlL2OE0EQhLtTnmKzBckBJyEkeAAyEAkBEbI4IwLEIRsuOXgKXhibna76ekzE+n7W89NTVV01v9+8e/32fcZ9PKy3h9PH4/pyWX/+uFl3y/rp7vj9uP/64e54e7iMv9p/OR3O46fP+2+H8/fHz56+eL5bbp7sll/L/z2PIvP8k5e/sb1ffrbX8bk8Y3pbFmN1jJ2e2J5t7O+mrVqOwRoeq6pWaFWGgQSe1L9tMoS18I0jBhlVUxnB3EYLtqkZbgbWSZzE+ZYKABMoQyg5nlQG28YBY7BkGvDGe6TLptkK47zRxUTG6hZ81StEVRe70YMkGpNSb20MdVEs60EHZ/WIvuuUptb7ZbXJ0C0cZwqtFdZh4fXZyiIJ3aW2gBwAO/1DNnHnibZgCpRqkQwsjnAwW9mBu+swmjRpqWBfvYI+0EQ7qNmGIosTGiHZlc6SArFKbG0RUvzgmevoVz+vRi16oLLJqVmOi6JFa9nRiibAltqTGWuM0aYAWtdO1XEGSePLMm5BTnIwQeWEYg1TWw1bPsC8cPvqodaOlD/RTgK26OtxEUH68HjLqzQRLUXEAsFj3mrPgxQpOPTaYBxuZxIERFcpdrMW8bxqVo8W9kyOn2aNvvFg0IqiM6O31i19R39KKLYdYO1oey2BL6/aIHSEx9ijV7hfmAG1m1LjMudmn2Vm9c85YHeMvgSXwKpv1XRrUS4thdEclMB60zftBHKBpd+npvhdhvUFVj5xMTTfSjtp2Smor7w4ymtaHpycYmXHwT2m6XsgTTSpYZNftwMbLYeU5wwQ7rZMVZiMoQEib7cy09aMcQk99kadQowwl3tNiqbsgFA0+cPWgDHhKGkllzZ3ak5ODp8kfCqO/FbI0QU5zAoVRBgCYfF3JMp72ZispZO2bk9ZS2WKmU1AVyDlSorQ4rpg6sRY8Mv3DvUcK8VDG4wBkFIIzAQi8yqheUAaNeWccHVDgwrJZc3ExYnuymzjXNvuFneevzZggnaifBlQtZrjNG2l4Rqo6mF1wnskhPeh0c0qYDMxVuaoNhhGW8wWwjC6+JJI1SJZHex8nyWmFRC2pNna5XwF+pZBwLorIv8ARAEjAQ=="
+                    },
+                    "num_bits": 1
+                  }
+                }
+              }
+            }
+          },
+          "metadata": {
+            "circuit_metadata": {},
+            "num_randomizations": 32,
+            "compilation": {
+              "scheduler_timing": null,
+              "stretch_values": null
+            }
+          }
+        }
+      },
+      {
+        "__type__": "SamplerPubResult",
+        "__value__": {
+          "data": {
+            "__type__": "DataBin",
+            "__value__": {
+              "field_names": [
+                "c"
+              ],
+              "shape": [],
+              "fields": {
+                "c": {
+                  "__type__": "BitArray",
+                  "__value__": {
+                    "array": {
+                      "__type__": "ndarray",
+                      "__value__": "eJydV7tuFEEQnEr5is0WpAuwhJDgA8iMSAiI0AkfIkAY3QEJ8BX8MGd2ux69G3GWfJ7Zme6q6uqZ9Z/Xb2/fvMP4MX7Od6fLh/P8cpp/fb+ZD9P88f787Xz88v7+fHd6mH91/Hw5Xecvn45fT9fx42dPXzw/TDdPDtPv6f8+j8YAMK6///3sfB6ero+gZcvS7QYt5u41OrBEWsZgPkB7AQZGZVRyBBqsW2GbK/ywv9a02KUXNOo52h9CGCuF2xgs4IjLCa1Cl4QQKCQOTwRELrhyewgSHQZVt5UxsWaxXQTO1GsQA1HQUM8dB1phRkSWRUrezptxGzvb3h5kGXvVzGYmHnND1qhFkOdsoLggfG0l6Y3N4Ipgo40bVrIPwBlFN0BhCo1zNO8LYZRp5HeiaL+6tdB3ASJmh4O87vxFoVs4M0hzd4nUaaDZSCmEcqdDCi2AFGWnE71IgZbNBdOkCVY9wp4fDsj9z0JieB0Zkv5RdqYAFUWhUvsGJbq925GmZn1EwDpCxeAYWlY0+M2cLobNWXU9q3VIjAXKFWbltwdJDKNVDG2cNioUE7HjimdMhKgQo+CZFYt1si1MzZoy5/IK5Th8L10KZwMJ0zx8nHDdSfrt9wYyhDUFfMaSlD9V6+LlUm86r/uTs8gNntZ8G8MI0Tj3rGb0vi6iJZyE7JaKmmU++cq8Rfh7QXqPsMWs0H5h9Wa2bNEwduftELc3hHYbR9OZk1HHY49lLLe92OXqddGxxuT9DSdCu00tQFBnD9GR9maj1D107vXmow4DIbM6cJSScVyYSe2YcVm3IMLlTjxn7awSp1jTVNXyDm0dkJ5XzP3dvzlkYWxUpMV5VUAnYd4OhsHV5k/tYXt5grgvbXPZU2DtlV0lqyShpyEwjk0Ev+2Gb7MSOCuDHpXcM2Lgrp1RVTtqVKeqY0ZzAIGT3vW1sidiUklVbH9TUExJpVN90wLGYSOjfWDbU2DZrrVkQhoBGsLiGjNCeaFBcXeAEU3SNKGW8XVOl4I/0v/Rw0aeBXXVA0SviCKzTP0FM6Qg5w=="
+                    },
+                    "num_bits": 1
+                  }
+                }
+              }
+            }
+          },
+          "metadata": {
+            "circuit_metadata": {},
+            "num_randomizations": 32,
+            "compilation": {
+              "scheduler_timing": null,
+              "stretch_values": null
+            }
+          }
+        }
+      },
+      {
+        "__type__": "SamplerPubResult",
+        "__value__": {
+          "data": {
+            "__type__": "DataBin",
+            "__value__": {
+              "field_names": [
+                "c"
+              ],
+              "shape": [],
+              "fields": {
+                "c": {
+                  "__type__": "BitArray",
+                  "__value__": {
+                    "array": {
+                      "__type__": "ndarray",
+                      "__value__": "eJydlj1uFEEQhfulnGKzBckBlhASHIAMREJAhCy8iABhtAskwCm4MPYyVfW96jYBY+14pn+q6v109/x+9ebl67ca38eP/fXh9P64f77b//x2ub/Y7T/cHL8erz6/uzleH+7aX1x9Oh1u208fr74cbt8fPnn87OnF7vLRxe7X7v+uB2O7dP7d/d3dzvdzWzzXqO1JcasOZYj8ZeMURIoeCe+jOs//siVTrMMNvOYsZQgFqEg+lzMC+d85WzVSZlaNDqLAgBcROcECkrRxGCMmie6B1IgIkXrADUryUOrK4ng2/PNuUG/6rsFnylbagnumS1tYr6i2wZgyVnWpXFRLF5WzVJEbZiMloEAEtVGzHGZStcFp+XxT+Fa1IJwkAZEwQ7lYql4WnNw6sUVnAz6VugJkVqJ60SlTGWurZQ8elKBVMZqbqYIQZSofQ7q65ebke6vDEHBSbmmJfZUNa4WJQTzdVkm7lRsNUaMbCasPHpfF6DvnwCuIYLmQdIbZLmNLBjcCSegTA7Zp7jwb1UEIGdo5AG0NgPxFcJNiM6Iz7gW7hSnaWfRKxUFV4qgrwxoL5RwiZXLbHKC6aN9ImgMtWBJXlBgFS+A9gsuV+2mbEMPNitU0enOF8rYCmdDSVuBRQKiSOMkFkKiiJFTtwHOd+ACgD5opuG74WNYQy7e1pUWQVi4Cq/WWzAVY2DGs5szTSjTu2EK/NlJrZ4RHA6QVuu21NINGl9+vrB71Zd/KKcg0SdPn16/tybMGZqU2v27bmczNaTQDkqLYBTz51qtGPvgQ4XEVpCJlN1RW4Rs1GNCM5g5tYWWI7GNDDOdP7dwBwWmy8h+NVw6LhDlUmOuKOBbrjX2U1tU0rIaKZbiUom7R0OpNV+YXZ4mcnwHkAzE0mRSoJh59WWRo2L0vJSsjYPZlEY5Npy5VmchZXlui2qLV62lhejT3nLfeW4opmAuF0heqpJ5fBhZoDfEfsHF4sU2Mm+HVW/rp044O4NhOfREYvwp7svOQP5OLIEM="
+                    },
+                    "num_bits": 1
+                  }
+                }
+              }
+            }
+          },
+          "metadata": {
+            "circuit_metadata": {},
+            "num_randomizations": 32,
+            "compilation": {
+              "scheduler_timing": null,
+              "stretch_values": null
+            }
+          }
+        }
+      },
+      {
+        "__type__": "SamplerPubResult",
+        "__value__": {
+          "data": {
+            "__type__": "DataBin",
+            "__value__": {
+              "field_names": [
+                "c"
+              ],
+              "shape": [],
+              "fields": {
+                "c": {
+                  "__type__": "BitArray",
+                  "__value__": {
+                    "array": {
+                      "__type__": "ndarray",
+                      "__value__": "eJydlD1uk1EQRd+0rMKdQUpBJIQEC6AD0VBQoYgYUSCCHKABVsGGSWLPPWe+kkhJ7PczP3fOfX/fvHv99n2tn+vX/vpw+/G4f7nb//5xub/Y7T/dHL8fr75+uDleH+7XX119uT3crd9+vvp2uPv++NnTF88vdpdPLnZ/dv/382jVWg+/q/hbWqz+VueV+7XzctV5/fS9dOVh63Sn+sPK//N+oiTPOXEXUIuwfa0jZblTJcVSIwmfQk71nxtJ4Cyf71bKLqXg4mkFuWZja23SqTQfoMhuPSK649WJ03srW4tKoktVRPBol9IQK0Wj8upvHOvxp/acj5oIGwDU4+ot2Eor1X10niiuYopyglbGpYaFIGNHnKgN2ZOkYr5MFCUy9miulrrulFkUnEbhdTQydV0Ut0U6GI0ZYbBM3spvjTpY12wpj1PNuN6CmAIFMwQyi4NcwedKGU6Nb5E4qkIpQ/SmvcdOcvLinMeDPWo4yPRwfVaX8y484rOqahtBoRzJmFoLrc6dKNgsl4CPGLnBi5gjTNAI0CobY4fDIroSC4epX/cP3r2KDp0z+vFu2GUYPA4F0gZrcp9SMpFQYB7AdWXIktMDMdvRdqUOlJM/KnEGEsiJg9Ip4sMqmI8r+RJdFBZu5SU8tDqM5s+edETsSZtwV/2yNjjhtkygbeeL5SeBFKVwYlpUBNIwG00jmbVQgO1AVv/YShO/mYVIbfS2vHQQF+19pIwlKIwS4CckD/PZLPJ5YEGweFF+l9ciPiSlHuw1Y5JH4KK8LNLFclxMGOyhRU4pm2ep6jQ9652agILJLW0PleQ8mhSzAc62WGoIoVXn0n3PK/1Am3HSVEzsBhdMai1UACqqgY5oubfgI7g4DCJjKpluUyVikQlOITcPUbJEvCEUbkEbPxo9UTA2oDUqIUGpI2muHiOPrIyAbq6viVJolfZhMFPUm4Sdllob5tRhJCx1LPqlvI2SaUhJwTd8M+wUyQhEGs+NVyXkhZaKCJqU3S+uNrRkIznCTeY2emtxwBFE4UtTWzFzjTh5PpId3EdwVJSveouJ087wkz67YT0oomTpM31ime0xVv4B/nkjbA=="
+                    },
+                    "num_bits": 1
+                  }
+                }
+              }
+            }
+          },
+          "metadata": {
+            "circuit_metadata": {},
+            "num_randomizations": 32,
+            "compilation": {
+              "scheduler_timing": null,
+              "stretch_values": null
+            }
+          }
+        }
+      },
+      {
+        "__type__": "SamplerPubResult",
+        "__value__": {
+          "data": {
+            "__type__": "DataBin",
+            "__value__": {
+              "field_names": [
+                "c"
+              ],
+              "shape": [],
+              "fields": {
+                "c": {
+                  "__type__": "BitArray",
+                  "__value__": {
+                    "array": {
+                      "__type__": "ndarray",
+                      "__value__": "eJydV7uOE0EQnEr5CmcLkgNOQkjwAWSHLiEgQhZnRIA4ZAPJwVfwwxyyZ6arunoxbODb6Wf1c+d+vX5zffMW7Xu7X273x/eH5eVm+fHtatlulg93h6+H3ed3d4fb/R/6q92n4/6Bfvy4+7J/OD9+9vTF8+3m6sl283Pzf8+jBqCFp58w3ycF40RiXfUkgkgJhrsNtOhxGAqWFNAZYoc0HAyTCnWogi1iwEyyQhLkI3YjMZBbg8gCaCyc9ECOUjZBgkzEQBSzY93AAgYxFSrrK0+BQYBoMahxZmel0OdvhhISEPuUbdQZH90HZAdF4DGrOammP7kGObW93g7hSp/oEMBwjZ5tGYqKGAGsbAoz38YvkjRYBORX49UuDtMYDyl2LSY4qtZUZ2CzY7xCsRo1Q6iadDuyPU0t/E1KDEvyWM6pkXcYxS8jKXrU9TAbELOAxZ08VwGd9MGbQCEY0Nn62jO9FxOwaikUqmDPkMfX42/SbUizh/CWZrerQN5W0avnFJN0RVopKRgdXEhU2ZsG4E25tZBCMtUrpm+KxXhGZlFoyJo4Nyhx85YAa8JQlTvpbiijcLxnqQvrl3CCNtHpV8PJLof2Wk8FJzU6IiNz01yqjE85Uix0DIEFu6a9cg+Nc6iQoCWcNofqpNvXC5XJ3RSgsVydLdUYCnQN7/3c5jXb165EddFTbYpJ9eNCU5ZRwSiE6ay2yjxzxDD782w0KrJTO4rRdIeT0ZRayiyvMxeVBBNMRJ8mj3YASI8xpG9U3a8EVjOApntHDmiSq6qis/rKKbBM2Kmx1ue2WBfmn2HjsufhXybpoi/6bzx2Hls="
+                    },
+                    "num_bits": 1
+                  }
+                }
+              }
+            }
+          },
+          "metadata": {
+            "circuit_metadata": {},
+            "num_randomizations": 32,
+            "compilation": {
+              "scheduler_timing": null,
+              "stretch_values": null
+            }
+          }
+        }
+      },
+      {
+        "__type__": "SamplerPubResult",
+        "__value__": {
+          "data": {
+            "__type__": "DataBin",
+            "__value__": {
+              "field_names": [
+                "c"
+              ],
+              "shape": [],
+              "fields": {
+                "c": {
+                  "__type__": "BitArray",
+                  "__value__": {
+                    "array": {
+                      "__type__": "ndarray",
+                      "__value__": "eJydlL1uU1EQhHdbnsKdQUpBJIQED0AXRENBhSxiRIEIsoEGeApemDjXM/PtNRVJwD73nj07Oz/nz+u3N2/edf2on9vb/fHDYftys/31/Xp7tdl+vDt8O+y+vL873O5Pz1/tPh/398+Pn3Zf9/frx8+evnh+tbl+crX5vfm/n0ddp9/qXv6W5enz9N95fVo8LKtO32pZVjbPj4fzqlSXfbU8PLfUhuWF/2VjuxdAnHEETBu6ClC7lPkgPyqddq4TcC8Eshur7gzgKTRDuqdT6Xx1QvcmeLHr6QPHDPplCOBejanCEqh2PaUCIMvUHfwNLBrYrJsCrcg+WHJbPgD4nDF/e04HBHGVgYL4BsgSAUZgpmH11rDruewYbIc5ziNPM7gOSrYr3SvnlkRpYI0vzGwHpMNhgWB+JytmAKwcVBMUemAqmWeM5dzHG8bN2UxwNvgIU8h2SCmcNGxKXFRrWJdp8JHISY1nfgAt4zgAxACX26ykj6VbOfdIi8ll3thUWkF7RioJcYDHRvgMrUwzhU1aZyN3BnzPFl7TEdvgTIkJ15KvcAbD6SoINeVHuDqS6sgTLwNJ2PQdkOocI255c9j44iJ2ZeYoRZi12OLG9iGhfmfDIVYgrJu15fwK6jAjnU93KHrQe64ScXGzOofLOTqtV9iZOTRfJaqYOOFPZwd9aktuVIi8qJhJsHrIP+hHotMpw1ElGVEWDyFpQT92iv5hcu23WWM3vRiNfSUhjmMWySl2kQJa0QY3Wc6lbBSwsR1qQmVlH02UZ7kLwraMG+374l1FfCUtFUOmi9wPsEOpCIMB7Zx42p6iaBiCKVl3xWUCS/PC8nCDqcQGszpy8BYcZM3BHjifU64yXHjjQ9eOptXiQQSFsTA5s0Mh4a6GRDSH5E/mC0ScZ4rneGe6iVvlRJgmtMX3qXI72M+g4FoHFRcsTCTyL3TId2cKXm6f6O06LuARvoTcBxdmboBOA2KZajlDCI81LBqhUWc5OZ29Hq2iv27oDgHeYTU84IqJVZSDGJ5amTqZn7LnyhCT43AQkKf0cz6Rbdiwsz/uHR1qjWYOwISA49wK8FHna3aIo3arBdZfoS0jVw=="
+                    },
+                    "num_bits": 1
+                  }
+                }
+              }
+            }
+          },
+          "metadata": {
+            "circuit_metadata": {},
+            "num_randomizations": 32,
+            "compilation": {
+              "scheduler_timing": null,
+              "stretch_values": null
+            }
+          }
+        }
+      },
+      {
+        "__type__": "SamplerPubResult",
+        "__value__": {
+          "data": {
+            "__type__": "DataBin",
+            "__value__": {
+              "field_names": [
+                "c"
+              ],
+              "shape": [],
+              "fields": {
+                "c": {
+                  "__type__": "BitArray",
+                  "__value__": {
+                    "array": {
+                      "__type__": "ndarray",
+                      "__value__": "eJydlDFuVEEQRLtTTrHZguQASwgJDkBmREJAhCy8iABhtAYS4BRcGHs9VfX6m4hvydr/Z7qnu/rV/Hn99uLNu64f9XN/dbj5cNy/3O1/fT/fn+32H6+P346XX95fH68Od99fXX6+Odx+v/l0+fVw+/742dMXz89250/Odr93//c86q6qvv2r04+75/S+Ppye1tp682rf/14RrQzYkzQr9Qo8hW13nv7nsPYZTuBy+r7E5NBrqSLXu4JTrkpWZDJ1r9i1ra2OwlKzeruvxWJBzi4UzMYVraNUTq/zPQQUpHAnX8+q28kkImcELRWh/aUs+aBEzocJAIjGauPc9WVVn7qVYWYMOemCmz2gzrkZvFtRQpzluZLgKrTvbCA3S+F6oNtmD/ob4U6DGdyQth/0wFqG74Jibz9DeOOa/sIC5wAZG0sPbJbqe0qCidgYUSeGsXdzt6gYKjKmmHPiIBQb4264sA3VD7CNnxwz3UbicoFAvswJjnRLnnjAc/+uNU2yTTcIArLN07BcmVWGZdRCD+to7sTVBR0tMMHQksm3QEGjRh/4zAvLB9lInX7jLM/cIXROj9fOoZNk/5/CgCajCbuCAAxPy0YtKHIkNVKlpgjvmDG0MX/zBxDbb2ZmckYpjDlRSHD2gTT0AOUNypAXQojAYap0DVP5KssAUHragRU5B6YbAhOzcJAzeO2Cs8FKdK9KJkZjwmgnSuQWgkSth5pmQpktB53p0YuZPMrHXfUPuuYJmiRvhlA0Lq0BbCDCsHCCAVGdvh3S+lRUbQ21G/0UikU/lVijGA0cSf8ZRIkqJ2mCHjAtIBiauzJuUQe+YBLcKHSd4C93RrkbVclQlVpz49SmCCuI0dk71L+QHuRueXCd3TMiHsAcehwZTkMzdkZrN7XFWCAX6rGKAYsu4wrOCRHVkQMAbVDVrpxmAzXMHB6InNFKm6o8rpFDwyTKo7BDBPOPDnWqUxu/FbL+Yf4G032hln5Q8aBZP0ZlkWfBQjcBdotvrwBKDARekt5GPXMNPD6XwMY5rhnNyMYWTmIOb5mEOelKUeUnQdKJeTLCDX/lrfM+QDx6pXnH4e0X+yMgwaRGNGQnlZOQ9a6/X30jEA=="
+                    },
+                    "num_bits": 1
+                  }
+                }
+              }
+            }
+          },
+          "metadata": {
+            "circuit_metadata": {},
+            "num_randomizations": 32,
+            "compilation": {
+              "scheduler_timing": null,
+              "stretch_values": null
+            }
+          }
+        }
+      },
+      {
+        "__type__": "SamplerPubResult",
+        "__value__": {
+          "data": {
+            "__type__": "DataBin",
+            "__value__": {
+              "field_names": [
+                "c"
+              ],
+              "shape": [],
+              "fields": {
+                "c": {
+                  "__type__": "BitArray",
+                  "__value__": {
+                    "array": {
+                      "__type__": "ndarray",
+                      "__value__": "eJyb7BfqGxDJyFDGUK2eklqcXKRupaBeU2qorqOgnpZfVFKUmBefX5SSChJ3S8wpTgWKF2ckFqQC+RomBpZmOgqGmjoKtQrkAS6GUTAKRsEoGAUEAONAO2AUjIJRMApGwSgYBaNgFIwCigEAGZQb+A=="
+                    },
+                    "num_bits": 1
+                  }
+                }
+              }
+            }
+          },
+          "metadata": {
+            "circuit_metadata": {},
+            "num_randomizations": 32,
+            "compilation": {
+              "scheduler_timing": null,
+              "stretch_values": null
+            }
+          }
+        }
+      },
+      {
+        "__type__": "SamplerPubResult",
+        "__value__": {
+          "data": {
+            "__type__": "DataBin",
+            "__value__": {
+              "field_names": [
+                "c"
+              ],
+              "shape": [],
+              "fields": {
+                "c": {
+                  "__type__": "BitArray",
+                  "__value__": {
+                    "array": {
+                      "__type__": "ndarray",
+                      "__value__": "eJzNVrFOxDAMfV35imwBqQMnIST4ALZDLAxMqOKKGBCHWmABvoIf5pAANYkdv6atwEub+Pk5cWLHH+eX64urCi949Zu2v+n8qfNvzytfO3+77Z665uF6223ar/mz5r5vd/P9XfPY7sb7R4cnx7VbHdTu3ZXJXvUtqBRRFboeGUuLLkZDNwHFFYOsjdqsiH6RqMlNcjBE31IqhCAoNvQB5Y83H0ZkRoIK0VgyApLQ53nti0FFnkRk4JAJ4q2L9lo89KzkRA9GOSfl9vdazk0dutEVht8x1WEWXIimq9mIHCMdI54QoHkvSx0pEYTprhUGvtobRISeKfJKMUmJbOCwhGeKkcL/v+Vnb+CaiKFRWWlNYqlo06AP/5UnW2Y0+pQpUtwtCg+WnljjV6E1NSNYpPiTtPMUAjopx7WP0ZVYLEWRvaoh0lBOW+MSR5YmKr3O4tBnO1rzsZDa5AAD5siYBpxeGSdSYLnS+xevD+OTXldQrRd+cz8BrwErMw=="
+                    },
+                    "num_bits": 1
+                  }
+                }
+              }
+            }
+          },
+          "metadata": {
+            "circuit_metadata": {},
+            "num_randomizations": 32,
+            "compilation": {
+              "scheduler_timing": null,
+              "stretch_values": null
+            }
+          }
+        }
+      }
+    ],
+    "metadata": {
+      "execution": {
+        "execution_spans": {
+          "__type__": "ExecutionSpans",
+          "__value__": {
+            "spans": [
+              {
+                "__type__": "TwirledSliceSpanV2",
+                "__value__": {
+                  "start": {
+                    "__type__": "datetime",
+                    "__value__": "2026-10-18T10:33:25.019525"
+                  },
+                  "stop": {
+                    "__type__": "datetime",
+                    "__value__": "2026-10-18T10:33:39.967937"
+                  },
+                  "data_slices": {
+                    "0": [
+                      [
+                        32,
+                        128
+                      ],
+                      true,
+                      0,
+                      32,
+                      0,
+                      128,
+                      4096
+                    ],
+                    "1": [
+                      [
+                        32,
+                        128
+                      ],
+                      true,
+                      0,
+                      32,
+                      0,
+                      128,
+                      4096
+                    ],
+                    "2": [
+                      [
+                        32,
+                        128
+                      ],
+                      true,
+                      0,
+                      32,
+                      0,
+                      128,
+                      4096
+                    ],
+                    "3": [
+                      [
+                        32,
+                        128
+                      ],
+                      true,
+                      0,
+                      32,
+                      0,
+                      128,
+                      4096
+                    ],
+                    "4": [
+                      [
+                        32,
+                        128
+                      ],
+                      true,
+                      0,
+                      32,
+                      0,
+                      128,
+                      4096
+                    ],
+                    "5": [
+                      [
+                        32,
+                        128
+                      ],
+                      true,
+                      0,
+                      32,
+                      0,
+                      128,
+                      4096
+                    ],
+                    "6": [
+                      [
+                        32,
+                        128
+                      ],
+                      true,
+                      0,
+                      32,
+                      0,
+                      128,
+                      4096
+                    ],
+                    "7": [
+                      [
+                        32,
+                        128
+                      ],
+                      true,
+                      0,
+                      32,
+                      0,
+                      128,
+                      4096
+                    ],
+                    "8": [
+                      [
+                        32,
+                        128
+                      ],
+                      true,
+                      0,
+                      32,
+                      0,
+                      128,
+                      4096
+                    ],
+                    "10": [
+                      [
+                        32,
+                        128
+                      ],
+                      true,
+                      0,
+                      32,
+                      0,
+                      128,
+                      4096
+                    ],
+                    "9": [
+                      [
+                        32,
+                        128
+                      ],
+                      true,
+                      0,
+                      32,
+                      0,
+                      128,
+                      4096
+                    ],
+                    "11": [
+                      [
+                        32,
+                        128
+                      ],
+                      true,
+                      0,
+                      32,
+                      0,
+                      128,
+                      4096
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "version": 2
+    }
+  }
+}

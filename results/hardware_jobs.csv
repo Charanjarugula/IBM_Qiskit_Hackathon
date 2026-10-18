@@ -1,0 +1,10 @@
+experiment,backend,job_id,pair,gate_twirling,circuits,shots_per_circuit,charged_qpu_seconds
+wave_energy,ibm_marrakesh,db9smd9gv2cc73e60pm0,,true,6,4000,9
+pressure_pilot_hardware,ibm_kingston,dba61tpgv2cc73e6dpsg,,false,12,1024,6
+pressure_pilot_twirled,ibm_kingston,dba648ni0auc7391isg0,,true,12,1024,6
+pressure_paired_hardware,ibm_kingston,dbaa07k24mrc73853fo0,1,false,12,4096,16
+pressure_paired_hardware,ibm_kingston,dbaa0qpgv2cc73e6ib60,1,true,12,4096,17
+pressure_paired_hardware,ibm_kingston,dbaa121gv2cc73e6ibdg,2,true,12,4096,17
+pressure_paired_hardware,ibm_kingston,dbaa8l0c77vs7382h35g,2,false,12,4096,16
+pressure_paired_hardware,ibm_kingston,dbaadagc77vs7382h9a0,3,false,12,4096,16
+pressure_paired_hardware,ibm_kingston,dbaadh1gv2cc73e6iq8g,3,true,12,4096,17

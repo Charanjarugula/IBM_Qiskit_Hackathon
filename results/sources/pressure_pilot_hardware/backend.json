@@ -1,0 +1,20 @@
+{
+  "name": "ibm_kingston",
+  "num_qubits": 156,
+  "operation_names": [
+    "cz",
+    "delay",
+    "id",
+    "if_else",
+    "measure",
+    "measure_2",
+    "measure_reset",
+    "measure_reset_2",
+    "reset",
+    "reset_2",
+    "rz",
+    "sx",
+    "x",
+    "xslow"
+  ]
+}

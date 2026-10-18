@@ -1,0 +1,68 @@
+[
+  {
+    "bleed": false,
+    "steps": 2,
+    "fold": 1,
+    "raw": 0.01875,
+    "raw_se": 0.002144669992096686,
+    "postselected": 0.055025678650036686,
+    "post_se": 0.0061765331897769655,
+    "kept_fraction": 0.34075,
+    "shots": 4000
+  },
+  {
+    "bleed": false,
+    "steps": 4,
+    "fold": 1,
+    "raw": 0.01725,
+    "raw_se": 0.0020586668926759373,
+    "postselected": 0.07683741648106904,
+    "post_se": 0.008887657410268366,
+    "kept_fraction": 0.2245,
+    "shots": 4000
+  },
+  {
+    "bleed": false,
+    "steps": 6,
+    "fold": 1,
+    "raw": 0.01625,
+    "raw_se": 0.0019991209005460375,
+    "postselected": 0.08990318118948824,
+    "post_se": 0.010638053722400972,
+    "kept_fraction": 0.18075,
+    "shots": 4000
+  },
+  {
+    "bleed": false,
+    "steps": 8,
+    "fold": 1,
+    "raw": 0.01325,
+    "raw_se": 0.0018079295824229436,
+    "postselected": 0.08128834355828221,
+    "post_se": 0.010702369782286487,
+    "kept_fraction": 0.163,
+    "shots": 4000
+  },
+  {
+    "bleed": false,
+    "steps": 8,
+    "fold": 3,
+    "raw": 0.00125,
+    "raw_se": 0.0005586674995021637,
+    "postselected": 0.08333333333333333,
+    "post_se": 0.03568120160740314,
+    "kept_fraction": 0.015,
+    "shots": 4000
+  },
+  {
+    "bleed": true,
+    "steps": 8,
+    "fold": 1,
+    "raw": 0.01325,
+    "raw_se": 0.0018079295824229436,
+    "postselected": 0.09122203098106713,
+    "post_se": 0.011945124963936363,
+    "kept_fraction": 0.14525,
+    "shots": 4000
+  }
+]

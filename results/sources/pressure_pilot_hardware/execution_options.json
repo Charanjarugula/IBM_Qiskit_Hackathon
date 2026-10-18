@@ -1,0 +1,18 @@
+{
+  "mode": "pilot",
+  "config": "ibm_hardware/pilot_1d.json",
+  "backend": "ibm_kingston",
+  "output": "/Users/charanjarugula/Desktop/Aperion Figures/sources/pressure_pilot_hardware",
+  "observations": null,
+  "reference": "/Users/charanjarugula/Desktop/Aperion Figures/sources/handoff/pilot/runs/pilot_reference.json",
+  "limits": "/Users/charanjarugula/Documents/ChatGPT/Quantum Computing/IBM_Qiskit_Hackathon/ibm_hardware/pilot_limits.json",
+  "parameters": [
+    1.0,
+    1.1
+  ],
+  "initial_layout": null,
+  "seed_transpiler": 7,
+  "include_original_arm": false,
+  "execute": true,
+  "submit_hardware": true
+}

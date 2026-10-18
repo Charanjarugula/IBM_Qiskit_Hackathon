@@ -1,0 +1,10 @@
+{
+  "exact": 0.1040337914178439,
+  "raw": 0.01325,
+  "postselected": 0.08128834355828221,
+  "zne": 0.08026584867075665,
+  "zne_se": 0.02400007613925078,
+  "absolute_error_reduction_percent": 74.94547484267,
+  "retained_1": 652,
+  "retained_3": 60
+}

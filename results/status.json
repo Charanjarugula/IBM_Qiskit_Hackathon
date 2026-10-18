@@ -1,0 +1,21 @@
+{
+  "simulator_campaigns": {
+    "gate_ideal": "complete; every-repeat 1% target failed",
+    "gate_noisy": "complete; 1% target failed",
+    "annealing_sa": "complete; 1% target failed",
+    "annealing_sqa": "complete; 1% target failed",
+    "small_1d_reconstruction": "complete at two updates; convergence not established",
+    "pulse_1d_reconstruction": "complete at two updates; convergence not established",
+    "matched_2d_gate": "stopped before first forward result",
+    "stride_2d_inversion": "stopped after diverging; not a valid completed reconstruction",
+    "stride_3d": "stopped"
+  },
+  "new_hardware": {
+    "pressure_pilot": "complete; 6 seconds charged; calibration passed but accuracy poor",
+    "compiled_exact_check": "12 circuits matched reference, <=4 active qubits",
+    "pressure_twirling_diagnostic": "complete; exploratory raw RMSE lower",
+    "three_repeat_campaign": "complete; three paired comparisons, gate twirling improved all three; readout correction worsened all six",
+    "qpu_seconds_used": 111
+  },
+  "scope": "No completed paper-scale classical versus quantum benchmark"
+}

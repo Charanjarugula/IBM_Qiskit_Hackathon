@@ -1,0 +1,17 @@
+{
+  "default_shots": 1024,
+  "max_execution_time": 60,
+  "dynamical_decoupling": {
+    "enable": false
+  },
+  "twirling": {
+    "enable_gates": true,
+    "enable_measure": false,
+    "num_randomizations": 32,
+    "shots_per_randomization": 32
+  },
+  "execution": {
+    "init_qubits": true,
+    "meas_type": "classified"
+  }
+}

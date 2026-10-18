@@ -1,0 +1,11 @@
+{
+  "baseline_job": "dba61tpgv2cc73e6dpsg",
+  "changed_factor": "gate twirling only: 32 randomizations x 32 shots",
+  "shots_per_circuit": 1024,
+  "circuits": 12,
+  "execution_seconds_ceiling": 60,
+  "primary_metric": "raw-pressure RMSE against the saved noiseless circuit",
+  "secondary_metric": "assignment-corrected pressure RMSE",
+  "scope": "Exploratory one-job follow-up; cross-job drift and twirl variability not isolated",
+  "runtime_docs": "https://quantum.cloud.ibm.com/docs/en/api/qiskit-ibm-runtime/options-twirling-options"
+}
