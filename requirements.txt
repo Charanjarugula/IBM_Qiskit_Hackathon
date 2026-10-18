@@ -1,0 +1,6 @@
+# Python 3.11 or 3.12. CPU examples, IBM adapter and saved-result figures.
+# Stride is optional and has a separate requirements file under classical/.
+-r simulator/requirements.txt
+-r annealing/requirements.txt
+-r ibm_hardware/requirements.txt
+-r results/requirements.txt
