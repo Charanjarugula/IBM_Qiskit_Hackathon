@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "description": "Time-dependent bipolar pressure-rate pulse; explicitly integrated in both solvers",
+  "shape": [2],
+  "spacing_m": 0.005,
+  "reference_speed_m_s": 1500,
+  "base_speed_ratio": [1, 1],
+  "region_ids": [0, 1],
+  "initial_parameters": [1, 1],
+  "synthetic_truth_parameters": [1, 1.1],
+  "parameter_lower": [0.8, 0.8],
+  "parameter_upper": [1.3, 1.3],
+  "sources": [0, 1],
+  "receivers": [0, 1],
+  "times_s": [0.000003, 0.000005],
+  "source": {
+    "kind": "pressure_rate",
+    "bin_edges_s": [0, 0.000001, 0.000002],
+    "values_pa_s": [1000000, -1000000]
+  },
+  "trotter_step_s": 0.00000025,
+  "optimizer": {"iterations": 2, "difference_step": 0.03, "learning_rate": 0.1, "max_parameter_step": 0.03}
+}

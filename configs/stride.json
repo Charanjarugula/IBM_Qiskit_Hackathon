@@ -1,0 +1,9 @@
+{
+  "padding_cells": 40,
+  "absorbing_cells": 30,
+  "max_frequency_hz": [40000, 60000, 80000],
+  "iterations_per_frequency": 8,
+  "step_size_m_s": 10,
+  "speed_min_m_s": 1400,
+  "speed_max_m_s": 3200
+}
