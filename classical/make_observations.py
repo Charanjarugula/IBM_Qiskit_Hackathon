@@ -11,8 +11,8 @@ def main():
     if not args.execute:
         parser.error('No data generated. --execute required when authorized.')
     import numpy as np
-    from shared.problem import Problem
-    from shared.evidence import Evidence
+    from ._core.problem import Problem
+    from ._core.evidence import Evidence
     from .reference import ClassicalForward
     p = Problem.load(args.config)
     truth = np.asarray(p.config['synthetic_truth_parameters'], dtype=float)

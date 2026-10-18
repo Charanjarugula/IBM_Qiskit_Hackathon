@@ -1,7 +1,9 @@
 """Adapted from Stride's breast2D/breast3D examples at commit 8733ecb9 (AGPL-3.0).
 
-Uses upstream forward(), adjoint(), L2DistanceLoss and GradientDescent rather than
-reimplementing the acoustic PDE or adjoint. Dataset convention is documented in README.md.
+Uses upstream forward(), adjoint(), L2DistanceLoss and GradientDescent.
+Input NPZ: vp_m_s[space], spacing_m[axis], dt_s, locations_m[transducer, axis],
+source_ids[source], wavelets[source, time], observed_pressure[source, receiver, time].
+Optional: rho_kg_m3[space], initial_vp_m_s[space]. See licenses/Stride-AGPL-3.0.txt.
 """
 import argparse
 import json
@@ -27,7 +29,7 @@ def main():
     from stride import (Space, Time, Problem, ScalarField, Shot, IsoAcousticDevito,
                         L2DistanceLoss, GradientDescent, ProcessGlobalGradient,
                         ProcessModelIteration, OptimisationLoop, forward, adjoint)
-    from shared.evidence import Evidence
+    from ._core.evidence import Evidence
 
     cfg = json.loads(Path(args.config).read_text())
     for key in ('padding_cells', 'absorbing_cells', 'iterations_per_frequency'):
@@ -154,8 +156,6 @@ def main():
                     mute_first_arrival=False, mute_traces=False,
                     time_tweaking=False, time_weighting=False, **physical_kwargs)
             np.save(evidence.path/'reconstructed_speed_m_s.npy', vp.data)
-            from shared.interpretation import interpret
-            evidence.write('illustrative_tissue_labels.json', interpret(vp.data))
         evidence.finish({'mode': args.mode, 'backend': 'Stride/Devito CPU',
                          'method': 'upstream forward and discrete-adjoint FWI'})
     try:

@@ -1,10 +1,10 @@
 """Regular 1D/2D/3D grids as graphs (vertices = cells, edges = links between neighbouring cells).
 
-Reused from AnikS22/IBM_Qiskit_Fallfest; MIT notice in licenses/Anik-MIT.txt.
+Reused from AnikS22/IBM_Qiskit_Fallfest; MIT notice in classical/licenses/Anik-MIT.txt.
 
 Boundary: every cell on the box face gets a 'ghost' edge to a fixed zero-pressure node outside the box
 (Dirichlet / pressure-release). This keeps the discrete operator exactly energy-conserving, which is
-what lets it run as unitary (quantum) evolution. Real heads sit in absorbing surroundings -> see README.md.
+what lets it run as unitary evolution. These reflecting boundaries differ from Stride's absorbing layer.
 """
 
 import numpy as np

@@ -1,6 +1,6 @@
 """Simple layered head phantom: water | scalp | skull | brain (+ optional bleed).
 
-Adapted from AnikS22/IBM_Qiskit_Fallfest (MIT; see licenses/Anik-MIT.txt).
+Adapted from AnikS22/IBM_Qiskit_Fallfest (MIT; see classical/licenses/Anik-MIT.txt).
 Speeds are illustrative literature-scale values, not validated tissue classification thresholds.
 This layered ellipsoid is not the anatomical phantom used by Guasch et al. 2020.
 """

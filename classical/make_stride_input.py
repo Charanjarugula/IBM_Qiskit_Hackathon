@@ -21,7 +21,7 @@ def main():
         parser.error('No input generated. --execute required when authorized.')
     import numpy as np
     from pathlib import Path
-    from shared.phantom import head_phantom, LABELS, SPEEDS
+    from ._core.phantom import head_phantom, LABELS, SPEEDS
     if args.head_cells < 16 or args.water_cells < 4 or args.transducers < 4 or args.spacing_m <= 0 or args.frequency_hz <= 0:
         raise ValueError('Invalid geometry or pulse parameters')
     if Path(args.output).exists():

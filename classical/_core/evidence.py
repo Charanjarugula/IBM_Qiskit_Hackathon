@@ -23,15 +23,14 @@ class Evidence:
         self.path = Path(directory).resolve()
         self.path.mkdir(parents=True, exist_ok=False)
         self.started = time.perf_counter()
-        root = Path(__file__).resolve().parents[1]
+        root = Path(__file__).resolve().parents[2]
         versions = {}
         for name in ('numpy', 'scipy', 'stride', 'devito'):
             try:
                 versions[name] = importlib.metadata.version(name)
             except importlib.metadata.PackageNotFoundError:
                 pass
-        files = [p for package in ('shared', 'classical')
-                 for p in root.glob(package+'/*.py')]
+        files = list((root/'classical').rglob('*.py'))
         hashes = {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
         for source in files:
             destination = self.path/'source'/source.relative_to(root)

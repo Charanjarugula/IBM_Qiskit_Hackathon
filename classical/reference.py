@@ -6,7 +6,7 @@ It is separate from the reusable Stride full-grid adjoint baseline.
 """
 import numpy as np
 from scipy.sparse.linalg import expm_multiply
-from shared.evidence import Prediction
+from ._core.evidence import Prediction
 
 
 class ClassicalForward:

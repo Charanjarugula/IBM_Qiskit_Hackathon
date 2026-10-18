@@ -38,8 +38,6 @@ def main(engine='classical'):
         evidence.write('reconstruction.json', {'parameters': parameters.tolist(),
                        'sound_speed_m_s': speed.tolist(),
                        'meaning': 'Estimated sound speed; not a diagnostic image'})
-        from .interpretation import interpret
-        evidence.write('illustrative_tissue_labels.json', interpret(speed))
         evidence.finish(solver.statistics())
     except BaseException as error:
         evidence.write('failure.json', {'type': type(error).__name__, 'message': str(error)})
