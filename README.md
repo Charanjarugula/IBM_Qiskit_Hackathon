@@ -128,13 +128,3 @@ Live preparation and execution use `python -m ibm_hardware.run --help`. They req
 The archived paired gate-twirling experiment has its [original submission script](results/sources/pressure_paired_hardware/submission_script.py) and [saved design](results/sources/pressure_paired_hardware/design.json). That script contains the original local paths and is retained as evidence. The general hardware CLI does not automatically rerun that paired campaign.
 
 </details>
-
-## Submission materials
-
-- [Presentation](https://www.figma.com/slides/lyatMgASwVcyjpRnwCH5Fk/Aperion)
-- [Use case](USE-CASE.md): who this could help, the classical baseline and why we explored quantum.
-- [Results and figures](results/README.md): what we measured and the files behind each claim.
-- [IBM job records](results/hardware_jobs.csv): backend names, job IDs, shots and QPU usage.
-- [Limitations](LIMITATIONS.md): what remains unfinished and what the experiments do not establish.
-
-The imaging motivation comes from [Guasch et al. (2020)](https://doi.org/10.1038/s41746-020-0240-8). The classical adapter uses [Stride](https://github.com/trustimaging/stride). The simulator handoff and original wave-energy experiment came through [Anik's repository](https://github.com/AnikS22/IBM_Qiskit_Fallfest); exact versions, source snapshots and our follow-up experiments are recorded in [provenance](results/provenance.json).
