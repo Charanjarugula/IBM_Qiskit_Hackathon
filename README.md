@@ -128,7 +128,3 @@ Live preparation and execution use `python -m ibm_hardware.run --help`. They req
 The archived paired gate-twirling experiment has its [original submission script](results/sources/pressure_paired_hardware/submission_script.py) and [saved design](results/sources/pressure_paired_hardware/design.json). That script contains the original local paths and is retained as evidence. The general hardware CLI does not automatically rerun that paired campaign.
 
 </details>
-
-## License
-
-Original Aperion code is licensed under the [MIT License](LICENSE). The Stride-derived [classical adapter](classical/stride_baseline.py), including its archived copies, remains under [AGPL-3.0](classical/licenses/Stride-AGPL-3.0.txt). Third-party code retains its existing copyright and license notices.
